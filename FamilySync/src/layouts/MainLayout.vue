@@ -1,44 +1,20 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
+    <div class="q-pa-md">
+      <q-toolbar class="bg-secondary text-white q-my-md shadow-2">
+        HEADER
+
+        <q-space />
+
+        <q-btn-toggle
+          v-model="model"
+          flat stretch
+          toggle-color="yellow"
+          :options="options"
+          @update:model-value="onOptionChange"
         />
-
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
-    </q-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
-
-        <EssentialLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
-
+    </div>
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -46,57 +22,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink.vue';
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { PATHS } from 'src/router/routes'
 
-const linksList: EssentialLinkProps[] = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-];
+const router = useRouter()
+const model = ref('home') // Default to 'home'
 
-const leftDrawerOpen = ref(false);
+const options = [
+  { label: 'Home', value: PATHS.HOME },
+  { label: 'Calendar', value: PATHS.CALENDAR },
+  { label: 'Shopping list', value: PATHS.SHOPPING_LIST },
+  { label: 'Todo list', value: PATHS.TODO_LIST },
+  { label: 'Settings', value: PATHS.SETTINGS },
+]
 
-function toggleLeftDrawer () {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
+// Function to handle route changes
+const onOptionChange = (value: string) => {
+  router.push({ path: value }).catch((err) => {
+    console.error('Failed to navigate:', err)
+  })
 }
 </script>
