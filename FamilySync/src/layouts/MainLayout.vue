@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <div class="q-pa-md">
-      <q-toolbar class="bg-secondary text-white q-my-md shadow-2">
+    <div>
+      <q-toolbar class="bg-secondary text-white shadow-2">
         FamilySync
 
         <q-space />
