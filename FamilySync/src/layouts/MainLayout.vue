@@ -18,7 +18,7 @@
             { value: PATHS.TODO_LIST, icon: 'checklist' },
             { value: PATHS.SETTINGS, icon: 'settings' },
           ]"
-          @update:model-value="handleRouteChange"
+          @update:model-value="handleToolbarRouteChange"
         />
       </q-toolbar>
     </div>
@@ -29,11 +29,30 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { useHandleRouteChange, PATHS } from 'src/router/routes'
 
-const model = ref('home')
+// Reactive model for the toolbar's active state
+const model = ref(PATHS.HOME)
 
+// Get the current route
+const route = useRoute()
+
+// Import the route change handler
 const { handleRouteChange } = useHandleRouteChange()
+
+// Watch for route changes and update the toolbar's active state
+watch(
+  () => route.path,
+  (newPath) => {
+    model.value = newPath
+  }
+)
+
+// Handle toolbar route changes
+const handleToolbarRouteChange = (newPath: string) => {
+  handleRouteChange(newPath)
+}
 
 </script>
