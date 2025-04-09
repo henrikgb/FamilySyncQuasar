@@ -35,7 +35,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: PATHS.CALENDAR,
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/CalendarPage.vue') }],
+    children: [{ path: '', component: () => import('pages/calendar/CalendarPage.vue') }],
   },
   {
     path: PATHS.SHOPPING_LIST,

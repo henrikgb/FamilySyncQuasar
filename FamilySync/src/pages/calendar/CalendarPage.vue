@@ -6,19 +6,18 @@
         <q-btn @click="setViewCalendarView" class="glossy" color="primary" icon-right="event_available" label="View calendar" />
       </div>
 
-      <q-layout v-if="isEditCalendar" class="bg-green-3 q-px-lg q-py-lg row justify-center item-center">
-          Edit calendar
-      </q-layout>
+      <EditCalendar v-if="isEditCalendar" />
 
-      <q-layout v-if="isViewCalendar" class="bg-blue-3 q-px-lg q-py-lg row justify-center item-center">
-          View calendar
-      </q-layout>
+      <ViewCalendar v-if="isViewCalendar" />
+
     </q-layout>
   </q-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import EditCalendar from './EditCalendar.vue';
+import ViewCalendar from './ViewCalendar.vue';
 
 const isEditCalendar = ref(true)
 const isViewCalendar = ref(false)
