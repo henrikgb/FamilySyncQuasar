@@ -11,7 +11,13 @@
           flat
           stretch
           toggle-color="yellow"
-          :options="options"
+          :options="[
+            { value: PATHS.HOME, icon: 'home' },
+            { value: PATHS.CALENDAR, icon: 'event' },
+            { value: PATHS.SHOPPING_LIST, icon: 'shopping_cart' },
+            { value: PATHS.TODO_LIST, icon: 'checklist' },
+            { value: PATHS.SETTINGS, icon: 'settings' },
+          ]"
           @update:model-value="onOptionChange"
         />
       </q-toolbar>
@@ -28,22 +34,8 @@ import { useRouter } from 'vue-router'
 import { PATHS } from 'src/router/routes'
 
 const router = useRouter()
-const model = ref('home') // Default to 'home'
+const model = ref('home')
 
-interface OptionType {
-  value: string
-  icon: string
-}
-
-const options: OptionType[] = [
-  { value: PATHS.HOME, icon: 'home' },
-  { value: PATHS.CALENDAR, icon: 'event' },
-  { value: PATHS.SHOPPING_LIST, icon: 'shopping_cart' },
-  { value: PATHS.TODO_LIST, icon: 'checklist' },
-  { value: PATHS.SETTINGS, icon: 'settings' },
-] as const
-
-// Function to handle route changes
 const onOptionChange = (value: string) => {
   router.push({ path: value }).catch((err) => {
     console.error('Failed to navigate:', err)
