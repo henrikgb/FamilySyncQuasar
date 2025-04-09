@@ -22,7 +22,7 @@
         />
       </q-toolbar>
     </div>
-    <q-page-container class="bg-green-2">
+    <q-page-container class="bg-yellow-2">
       <router-view />
     </q-page-container>
   </q-layout>
