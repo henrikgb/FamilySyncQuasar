@@ -1,4 +1,22 @@
 import type { RouteRecordRaw } from 'vue-router';
+import type { Router } from 'vue-router';
+import { useRouter } from 'vue-router';
+
+export function navigateTo(router: Router, path: string) {
+  router.push({ path }).catch((error) => {
+    console.log('Navigation error:', error);
+  });
+}
+
+export function useHandleRouteChange() {
+  const router = useRouter()
+
+  const handleRouteChange = (to: string) => {
+    navigateTo(router, to)
+  }
+
+  return { handleRouteChange }
+}
 
 export const PATHS = {
   HOME: '/',

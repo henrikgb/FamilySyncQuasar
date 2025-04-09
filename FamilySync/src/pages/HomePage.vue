@@ -7,7 +7,12 @@
     </div>
 
     <div class="column q-gutter-md" style="width: 100%; max-width: 400px;">
-      <q-btn outline class="q-pa-md" style="justify-start">
+      <q-btn
+        outline
+        class="q-pa-md"
+        style="justify-start"
+        @click="handleRouteChange(PATHS.CALENDAR)"
+      >
         <template #default>
           <div class="row items-center no-wrap full-width">
             <q-icon name="event" />
@@ -18,7 +23,12 @@
         </template>
       </q-btn>
 
-      <q-btn outline class="q-pa-md" style="justify-start">
+      <q-btn
+        outline
+        class="q-pa-md"
+        style="justify-start"
+        @click="handleRouteChange(PATHS.SHOPPING_LIST)"
+      >
         <template #default>
           <div class="row items-center no-wrap full-width">
             <q-icon name="shopping_cart" />
@@ -29,7 +39,12 @@
         </template>
       </q-btn>
 
-      <q-btn outline class="q-pa-md" style="justify-start">
+      <q-btn
+        outline
+        class="q-pa-md"
+        style="justify-start"
+        @click="handleRouteChange(PATHS.TODO_LIST)"
+      >
         <template #default>
           <div class="row items-center no-wrap full-width">
             <q-icon name="checklist" />
@@ -40,7 +55,12 @@
         </template>
       </q-btn>
 
-      <q-btn outline class="q-pa-md" style="justify-start">
+      <q-btn
+        outline
+        class="q-pa-md"
+        style="justify-start"
+        @click="handleRouteChange(PATHS.SETTINGS)"
+      >
         <template #default>
           <div class="row items-center no-wrap full-width">
             <q-icon name="tune" />
@@ -57,5 +77,6 @@
 
 
 <script setup lang="ts">
-//...
+import { useHandleRouteChange, PATHS } from 'src/router/routes'
+const { handleRouteChange } = useHandleRouteChange()
 </script>

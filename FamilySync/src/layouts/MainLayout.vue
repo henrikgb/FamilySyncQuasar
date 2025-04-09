@@ -18,7 +18,7 @@
             { value: PATHS.TODO_LIST, icon: 'checklist' },
             { value: PATHS.SETTINGS, icon: 'settings' },
           ]"
-          @update:model-value="onOptionChange"
+          @update:model-value="handleRouteChange"
         />
       </q-toolbar>
     </div>
@@ -30,15 +30,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { PATHS } from 'src/router/routes'
+import { useHandleRouteChange, PATHS } from 'src/router/routes'
 
-const router = useRouter()
 const model = ref('home')
 
-const onOptionChange = (value: string) => {
-  router.push({ path: value }).catch((err) => {
-    console.error('Failed to navigate:', err)
-  })
-}
+const { handleRouteChange } = useHandleRouteChange()
+
 </script>
