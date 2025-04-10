@@ -1,7 +1,13 @@
 <template>
-  <q-layout class="q-px-lg q-py-lg row justify-center item-center">
-    <div class="q-pa-md" style="max-width: 300px">
-      <q-input filled v-model="date" mask="date" :rules="['date']">
+  <q-layout class="q-px-lg q-py-lg">
+    <div class="w-100 bg-yellow-3 rounded-borders q-pa-md">
+      <q-input
+        filled
+        v-model="date"
+        mask="date"
+        :rules="['date']"
+        class="q-input-date"
+      >
         <template v-slot:append>
           <q-icon name="event" class="cursor-pointer">
             <q-popup-proxy cover transition-show="scale" transition-hide="scale">
@@ -14,12 +20,43 @@
           </q-icon>
         </template>
       </q-input>
+      <q-input
+        v-model="text"
+        filled
+        type="textarea"
+        class="q-input-textarea"
+      />
+      <div class="row justify-end">
+        <q-btn
+          class="q-mt-md"
+          label="Save"
+          color="primary"
+          @click="() => {
+            console.log('Saving text:', text)
+            console.log('For date:', date)
+          }"
+        />
+      </div>
     </div>
   </q-layout>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+
 const defaultDate = new Date().toISOString().split('T')?.[0]?.replace(/-/g, '/') ?? ''
 const date = ref(defaultDate)
+const text = ref('')
 </script>
+
+<style scoped>
+.q-input-date {
+  max-width: 200px;
+  width: 100%;
+}
+
+.q-input-textarea {
+  flex: 1;
+  width: 100%;
+}
+</style>
