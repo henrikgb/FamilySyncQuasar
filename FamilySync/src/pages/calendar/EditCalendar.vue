@@ -38,26 +38,33 @@
 
     <div class="q-mt-lg bg-yellow-3 rounded-borders q-pa-md">
       <q-list>
-        <q-item
-          v-for="(schedule, index) in sortedSchedules"
-          :key="index"
-          class="schedule-item"
+        <q-expansion-item
+          v-for="(schedules, key) in groupedSchedules"
+          :key="key"
+          :label="key"
+          expand-separator
         >
-          <q-item-section>
-            <div>
-              <strong>Date:</strong> {{ schedule.date }}<br />
-              <strong>Text:</strong> {{ schedule.text }}
-            </div>
-          </q-item-section>
-          <q-item-section side>
-            <q-btn
-              flat
-              icon="delete"
-              color="red"
-              @click="deleteSchedule(index)"
-            />
-          </q-item-section>
-        </q-item>
+          <q-item
+            v-for="(schedule, index) in schedules"
+            :key="index"
+            class="schedule-item"
+          >
+            <q-item-section>
+              <div>
+                <strong>Date:</strong> {{ schedule.date }}<br />
+                <strong>Text:</strong> {{ schedule.text }}
+              </div>
+            </q-item-section>
+            <q-item-section side>
+              <q-btn
+                flat
+                icon="delete"
+                color="red"
+                @click="deleteSchedule(index)"
+              />
+            </q-item-section>
+          </q-item>
+        </q-expansion-item>
       </q-list>
     </div>
   </q-layout>
@@ -74,6 +81,19 @@ const text = ref('')
 
 const sortedSchedules = computed(() => {
   return [...calendarSchedule.value].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+})
+
+const groupedSchedules = computed(() => {
+  const groups: Record<string, Array<{ date: string; text: string }>> = {}
+  sortedSchedules.value.forEach(schedule => {
+    const date = new Date(schedule.date)
+    const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
+    if (!groups[key]) {
+      groups[key] = []
+    }
+    groups[key].push(schedule)
+  })
+  return groups
 })
 
 const saveSchedule = () => {
