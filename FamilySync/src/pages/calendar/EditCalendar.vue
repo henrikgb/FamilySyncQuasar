@@ -47,26 +47,26 @@
           :label="key"
           class="black-border bg-lime-3"
         >
-          <q-item
-            v-for="(schedule, index) in schedules"
-            :key="index"
-            class="black-border bg-lime-2"
-          >
-            <q-item-section>
-              <div>
-                <strong>Date:</strong> {{ schedule.date }}<br />
-                <strong>Description:</strong> {{ schedule.description }}
-              </div>
-            </q-item-section>
-            <q-item-section side>
-              <q-btn
-                flat
-                icon="delete"
-                color="red"
-                @click="deleteSchedule(index)"
-              />
-            </q-item-section>
-          </q-item>
+        <q-item
+          v-for="(schedule, index) in schedules"
+          :key="index"
+          class="black-border bg-lime-2"
+        >
+          <q-item-section>
+            <div>
+              <strong>Date:</strong> {{ schedule.date }}<br />
+              <strong>Description:</strong> {{ schedule.description }}
+            </div>
+          </q-item-section>
+          <q-item-section side>
+            <q-btn
+              flat
+              icon="delete"
+              color="red"
+              @click="deleteSchedule(schedule)"
+            />
+          </q-item-section>
+        </q-item>
         </q-expansion-item>
       </q-list>
     </div>
@@ -121,14 +121,28 @@ const saveSchedule = () => {
   }
 }
 
-const deleteSchedule = (index: number) => {
-  calendarSchedule.value.splice(index, 1)
-  Notify.create({
-    message: 'Schedule deleted successfully!',
-    color: 'green',
-    icon: 'delete',
-    position: 'top'
-  })
+const deleteSchedule = (scheduleToDelete: Schedule) => {
+  const index = calendarSchedule.value.findIndex(
+    (schedule) =>
+      schedule.date === scheduleToDelete.date &&
+      schedule.description === scheduleToDelete.description
+  )
+  if (index !== -1) {
+    calendarSchedule.value.splice(index, 1)
+    Notify.create({
+      message: 'Schedule deleted successfully!',
+      color: 'green',
+      icon: 'delete',
+      position: 'top'
+    })
+  } else {
+    Notify.create({
+      message: 'Failed to delete schedule.',
+      color: 'red',
+      icon: 'error',
+      position: 'top'
+    })
+  }
 }
 </script>
 
