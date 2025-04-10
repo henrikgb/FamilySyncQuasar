@@ -73,6 +73,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { calendarSchedule } from 'src/assets/CalendarSchedule'
+import type { Schedule } from 'src/assets/CalendarSchedule'
 import { Notify } from 'quasar'
 
 const defaultDate = new Date().toISOString().split('T')?.[0]?.replace(/-/g, '/') ?? ''
@@ -84,7 +85,7 @@ const sortedSchedules = computed(() => {
 })
 
 const groupedSchedules = computed(() => {
-  const groups: Record<string, Array<{ date: string; text: string }>> = {}
+  const groups: Record<string, Schedule[]> = {}
   sortedSchedules.value.forEach(schedule => {
     const date = new Date(schedule.date)
     const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
