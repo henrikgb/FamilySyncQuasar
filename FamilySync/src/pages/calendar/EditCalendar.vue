@@ -1,6 +1,7 @@
 <template>
   <q-layout class="q-px-lg q-py-lg">
     <div class="w-100 bg-yellow-3 rounded-borders q-pa-md">
+      <h6 class="q-my-sm">Enter date:</h6>
       <q-input
         filled
         v-model="date"
@@ -20,6 +21,7 @@
           </q-icon>
         </template>
       </q-input>
+      <h6 class="q-my-sm">Enter description:</h6>
       <q-input
         v-model="text"
         filled
@@ -37,6 +39,7 @@
     </div>
 
     <div class="q-mt-lg bg-yellow-3 rounded-borders q-pa-md">
+      <h6 class="q-my-sm">Scheduled Events:</h6>
       <q-list>
         <q-expansion-item
           v-for="(schedules, key) in groupedSchedules"
