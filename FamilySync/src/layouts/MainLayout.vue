@@ -1,8 +1,13 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <div>
-      <q-toolbar class="bg-secondary text-white shadow-2">
-        FamilySync
+      <q-toolbar class="bg-teal glossy text-white shadow-2">
+        <img
+          src="~assets/WaterMark_HGB.png"
+          alt="FamilySync Logo"
+          width="42"
+          height="42"
+        />
 
         <q-space />
 
