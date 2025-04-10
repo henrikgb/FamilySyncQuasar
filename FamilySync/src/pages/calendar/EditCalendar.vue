@@ -31,10 +31,7 @@
           class="q-mt-md"
           label="Save"
           color="primary"
-          @click="() => {
-            console.log('Saving text:', text)
-            console.log('For date:', date)
-          }"
+          @click="saveSchedule"
         />
       </div>
     </div>
@@ -43,10 +40,33 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { calendarSchedule } from 'src/assets/CalendarSchedule'
+import { Notify } from 'quasar'
 
 const defaultDate = new Date().toISOString().split('T')?.[0]?.replace(/-/g, '/') ?? ''
 const date = ref(defaultDate)
 const text = ref('')
+
+const saveSchedule = () => {
+  if (date.value && text.value) {
+    calendarSchedule.value.push({ date: date.value, text: text.value })
+    date.value = defaultDate
+    text.value = ''
+    Notify.create({
+      message: 'Schedule saved successfully!',
+      color: 'green',
+      icon: 'check_circle',
+      position: 'top'
+    })
+  } else {
+    Notify.create({
+      message: 'Please fill in both the date and text.',
+      color: 'red',
+      icon: 'error',
+      position: 'top'
+    })
+  }
+}
 </script>
 
 <style scoped>

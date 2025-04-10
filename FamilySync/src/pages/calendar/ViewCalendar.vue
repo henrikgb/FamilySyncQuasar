@@ -34,37 +34,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-
-const panelData = [
-  {
-    date: '2025/04/01',
-    text: "TEST 2 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero."
-  },
-  {
-    date: '2025/04/01',
-    text: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero."
-  },
-  {
-    date: '2025/04/05',
-    text: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero."
-  },
-  {
-    date: '2025/04/06',
-    text: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero."
-  }
-]
+import { ref, computed, watch } from 'vue'
+import { calendarSchedule } from 'src/assets/CalendarSchedule'
 
 // Default date for the q-date component
 const defaultDate = new Date().toISOString().split('T')?.[0]?.replace(/-/g, '/') ?? ''
 const date = ref(defaultDate)
 
 // Extract unique dates for the q-date events
-const events = panelData.map(item => item.date)
+const events = ref(calendarSchedule.value.map(item => item.date))
+
+// Watch for changes in calendarSchedule to update events dynamically
+watch(calendarSchedule, (newSchedule) => {
+  events.value = newSchedule.map(item => item.date)
+})
 
 // Group panel data by date
 const groupedPanels = computed(() => {
-  return panelData.reduce((acc, item) => {
+  return calendarSchedule.value.reduce((acc, item) => {
     if (!acc[item.date]) {
       acc[item.date] = []
     }
