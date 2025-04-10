@@ -17,24 +17,15 @@
           transition-next="jump-up"
           class="bg-yellow-3 rounded-borders"
         >
-          <q-tab-panel name="2019/02/01">
-            <div class="text-h4 q-mb-md">2019/02/01</div>
-            <p>TEST 2 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-          </q-tab-panel>
-
-          <q-tab-panel name="2019/02/01">
-            <div class="text-h4 q-mb-md">2019/02/01</div>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-          </q-tab-panel>
-
-          <q-tab-panel name="2019/02/05">
-            <div class="text-h4 q-mb-md">2019/02/05</div>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-          </q-tab-panel>
-
-          <q-tab-panel name="2019/02/06">
-            <div class="text-h4 q-mb-md">2019/02/06</div>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+          <q-tab-panel
+            v-for="(texts, panelDate) in groupedPanels"
+            :key="panelDate"
+            :name="panelDate"
+          >
+            <div class="text-h4 q-mb-md">{{ panelDate }}</div>
+            <div v-for="(text, index) in texts" :key="index">
+              <p>{{ text }}</p>
+            </div>
           </q-tab-panel>
         </q-tab-panels>
       </div>
@@ -43,7 +34,42 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-const date = ref('2019/02/01')
-const events =  [ '2019/02/01', '2019/02/05', '2019/02/06' ]
+import { ref, computed } from 'vue'
+
+const panelData = [
+  {
+    date: '2025/04/01',
+    text: "TEST 2 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero."
+  },
+  {
+    date: '2025/04/01',
+    text: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero."
+  },
+  {
+    date: '2025/04/05',
+    text: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero."
+  },
+  {
+    date: '2025/04/06',
+    text: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero."
+  }
+]
+
+// Default date for the q-date component
+const defaultDate = new Date().toISOString().split('T')?.[0]?.replace(/-/g, '/') ?? ''
+const date = ref(defaultDate)
+
+// Extract unique dates for the q-date events
+const events = panelData.map(item => item.date)
+
+// Group panel data by date
+const groupedPanels = computed(() => {
+  return panelData.reduce((acc, item) => {
+    if (!acc[item.date]) {
+      acc[item.date] = []
+    }
+    acc[item.date]?.push(item.text)
+    return acc
+  }, {} as Record<string, string[]>)
+})
 </script>
