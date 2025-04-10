@@ -35,17 +35,46 @@
         />
       </div>
     </div>
+
+    <div class="q-mt-lg bg-yellow-3 rounded-borders q-pa-md">
+      <q-list>
+        <q-item
+          v-for="(schedule, index) in sortedSchedules"
+          :key="index"
+          class="schedule-item"
+        >
+          <q-item-section>
+            <div>
+              <strong>Date:</strong> {{ schedule.date }}<br />
+              <strong>Text:</strong> {{ schedule.text }}
+            </div>
+          </q-item-section>
+          <q-item-section side>
+            <q-btn
+              flat
+              icon="delete"
+              color="red"
+              @click="deleteSchedule(index)"
+            />
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </div>
   </q-layout>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { calendarSchedule } from 'src/assets/CalendarSchedule'
 import { Notify } from 'quasar'
 
 const defaultDate = new Date().toISOString().split('T')?.[0]?.replace(/-/g, '/') ?? ''
 const date = ref(defaultDate)
 const text = ref('')
+
+const sortedSchedules = computed(() => {
+  return [...calendarSchedule.value].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+})
 
 const saveSchedule = () => {
   if (date.value && text.value) {
@@ -67,6 +96,16 @@ const saveSchedule = () => {
     })
   }
 }
+
+const deleteSchedule = (index: number) => {
+  calendarSchedule.value.splice(index, 1)
+  Notify.create({
+    message: 'Schedule deleted successfully!',
+    color: 'green',
+    icon: 'delete',
+    position: 'top'
+  })
+}
 </script>
 
 <style scoped>
@@ -78,5 +117,12 @@ const saveSchedule = () => {
 .q-input-textarea {
   flex: 1;
   width: 100%;
+}
+
+.schedule-item {
+  border: 1px solid gray;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  padding: 8px;
 }
 </style>
