@@ -23,7 +23,7 @@
       </q-input>
       <h6 class="q-my-sm">Enter description:</h6>
       <q-input
-        v-model="text"
+        v-model="description"
         filled
         type="textarea"
         class="q-input-textarea"
@@ -55,7 +55,7 @@
             <q-item-section>
               <div>
                 <strong>Date:</strong> {{ schedule.date }}<br />
-                <strong>Text:</strong> {{ schedule.text }}
+                <strong>Description:</strong> {{ schedule.description }}
               </div>
             </q-item-section>
             <q-item-section side>
@@ -81,7 +81,7 @@ import { Notify } from 'quasar'
 
 const defaultDate = new Date().toISOString().split('T')?.[0]?.replace(/-/g, '/') ?? ''
 const date = ref(defaultDate)
-const text = ref('')
+const description = ref('')
 
 const sortedSchedules = computed(() => {
   return [...calendarSchedule.value].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
@@ -101,10 +101,10 @@ const groupedSchedules = computed(() => {
 })
 
 const saveSchedule = () => {
-  if (date.value && text.value) {
-    calendarSchedule.value.push({ date: date.value, text: text.value })
+  if (date.value && description.value) {
+    calendarSchedule.value.push({ date: date.value, description: description.value })
     date.value = defaultDate
-    text.value = ''
+    description.value = ''
     Notify.create({
       message: 'Schedule saved successfully!',
       color: 'green',
@@ -113,7 +113,7 @@ const saveSchedule = () => {
     })
   } else {
     Notify.create({
-      message: 'Please fill in both the date and text.',
+      message: 'Please fill in both the date and description.',
       color: 'red',
       icon: 'error',
       position: 'top'

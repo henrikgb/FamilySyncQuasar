@@ -18,13 +18,13 @@
           class="bg-yellow-3 rounded-borders"
         >
           <q-tab-panel
-            v-for="(texts, panelDate) in groupedPanels"
+            v-for="(descriptions, panelDate) in groupedPanels"
             :key="panelDate"
             :name="panelDate"
           >
             <div class="text-h4 q-mb-md">{{ panelDate }}</div>
-            <div v-for="(text, index) in texts" :key="index">
-              <p>{{ text }}</p>
+            <div v-for="(description, index) in descriptions" :key="index">
+              <p>{{ description }}</p>
             </div>
           </q-tab-panel>
         </q-tab-panels>
@@ -55,7 +55,7 @@ const groupedPanels = computed(() => {
     if (!acc[item.date]) {
       acc[item.date] = []
     }
-    acc[item.date]?.push(item.text)
+    acc[item.date]?.push(item.description)
     return acc
   }, {} as Record<string, string[]>)
 })
