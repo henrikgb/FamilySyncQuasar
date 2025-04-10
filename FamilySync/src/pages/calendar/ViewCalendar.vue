@@ -45,8 +45,8 @@ const date = ref(defaultDate)
 const events = ref(calendarSchedule.value.map(item => item.date))
 
 // Watch for changes in calendarSchedule to update events dynamically
-watch(calendarSchedule, (newSchedule) => {
-  events.value = newSchedule.map(item => item.date)
+watch(calendarSchedule, (newScheduleItem) => {
+  events.value = newScheduleItem.map(item => item.date)
 })
 
 // Group panel data by date

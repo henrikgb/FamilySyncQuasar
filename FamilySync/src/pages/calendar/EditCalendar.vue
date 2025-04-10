@@ -33,7 +33,7 @@
           class="q-mt-md"
           label="Save"
           color="primary"
-          @click="saveSchedule"
+          @click="saveScheduleItem"
         />
       </div>
     </div>
@@ -42,20 +42,20 @@
       <h6 class="q-my-sm">Scheduled Events:</h6>
       <q-list>
         <q-expansion-item
-          v-for="(schedules, key) in groupedSchedules"
+          v-for="(scheduleItems, key) in groupedScheduleItems"
           :key="key"
           :label="key"
           class="black-border bg-lime-3"
         >
         <q-item
-          v-for="(schedule, index) in schedules"
+          v-for="(scheduleItem, index) in scheduleItems"
           :key="index"
           class="black-border bg-lime-2"
         >
           <q-item-section>
             <div>
-              <strong>Date:</strong> {{ schedule.date }}<br />
-              <strong>Description:</strong> {{ schedule.description }}
+              <strong>Date:</strong> {{ scheduleItem.date }}<br />
+              <strong>Description:</strong> {{ scheduleItem.description }}
             </div>
           </q-item-section>
           <q-item-section side>
@@ -63,7 +63,7 @@
               flat
               icon="delete"
               color="red"
-              @click="deleteSchedule(schedule)"
+              @click="deleteScheduleItem(scheduleItem)"
             />
           </q-item-section>
         </q-item>
@@ -76,7 +76,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { calendarSchedule } from 'src/assets/CalendarSchedule'
-import type { Schedule } from 'src/assets/CalendarSchedule'
+import type { ScheduleItem } from 'src/assets/CalendarSchedule'
 import { Notify } from 'quasar'
 
 const defaultDate = new Date().toISOString().split('T')?.[0]?.replace(/-/g, '/') ?? ''
@@ -87,26 +87,26 @@ const sortedSchedules = computed(() => {
   return [...calendarSchedule.value].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 })
 
-const groupedSchedules = computed(() => {
-  const groups: Record<string, Schedule[]> = {}
-  sortedSchedules.value.forEach(schedule => {
-    const date = new Date(schedule.date)
+const groupedScheduleItems = computed(() => {
+  const groups: Record<string, ScheduleItem[]> = {}
+  sortedSchedules.value.forEach(scheduleItem => {
+    const date = new Date(scheduleItem.date)
     const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
     if (!groups[key]) {
       groups[key] = []
     }
-    groups[key].push(schedule)
+    groups[key].push(scheduleItem)
   })
   return groups
 })
 
-const saveSchedule = () => {
+const saveScheduleItem = () => {
   if (date.value && description.value) {
     calendarSchedule.value.push({ date: date.value, description: description.value })
     date.value = defaultDate
     description.value = ''
     Notify.create({
-      message: 'Schedule saved successfully!',
+      message: 'Schedule item saved successfully!',
       color: 'green',
       icon: 'check_circle',
       position: 'top'
@@ -121,23 +121,23 @@ const saveSchedule = () => {
   }
 }
 
-const deleteSchedule = (scheduleToDelete: Schedule) => {
+const deleteScheduleItem = (scheduleItemToDelete: ScheduleItem) => {
   const index = calendarSchedule.value.findIndex(
-    (schedule) =>
-      schedule.date === scheduleToDelete.date &&
-      schedule.description === scheduleToDelete.description
+    (scheduleItem) =>
+    scheduleItem.date === scheduleItemToDelete.date &&
+    scheduleItem.description === scheduleItemToDelete.description
   )
   if (index !== -1) {
     calendarSchedule.value.splice(index, 1)
     Notify.create({
-      message: 'Schedule deleted successfully!',
+      message: 'Schedule item deleted successfully!',
       color: 'green',
       icon: 'delete',
       position: 'top'
     })
   } else {
     Notify.create({
-      message: 'Failed to delete schedule.',
+      message: 'Failed to delete schedule item.',
       color: 'red',
       icon: 'error',
       position: 'top'
