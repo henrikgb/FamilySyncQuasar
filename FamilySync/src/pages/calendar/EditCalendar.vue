@@ -41,35 +41,33 @@
     <div class="q-mt-lg bg-yellow-3 rounded-borders q-pa-md">
       <h6 class="q-my-sm">Scheduled Events:</h6>
       <q-list>
-        <div class="bg-lime-3 rounded-borders q-pa-sm">
-          <q-expansion-item
-            v-for="(schedules, key) in groupedSchedules"
-            :key="key"
-            :label="key"
-            expand-separator
+        <q-expansion-item
+          v-for="(schedules, key) in groupedSchedules"
+          :key="key"
+          :label="key"
+          class="black-border bg-lime-3"
+        >
+          <q-item
+            v-for="(schedule, index) in schedules"
+            :key="index"
+            class="black-border bg-lime-2"
           >
-            <q-item
-              v-for="(schedule, index) in schedules"
-              :key="index"
-              class="schedule-item"
-            >
-              <q-item-section>
-                <div>
-                  <strong>Date:</strong> {{ schedule.date }}<br />
-                  <strong>Text:</strong> {{ schedule.text }}
-                </div>
-              </q-item-section>
-              <q-item-section side>
-                <q-btn
-                  flat
-                  icon="delete"
-                  color="red"
-                  @click="deleteSchedule(index)"
-                />
-              </q-item-section>
-            </q-item>
-          </q-expansion-item>
-        </div>
+            <q-item-section>
+              <div>
+                <strong>Date:</strong> {{ schedule.date }}<br />
+                <strong>Text:</strong> {{ schedule.text }}
+              </div>
+            </q-item-section>
+            <q-item-section side>
+              <q-btn
+                flat
+                icon="delete"
+                color="red"
+                @click="deleteSchedule(index)"
+              />
+            </q-item-section>
+          </q-item>
+        </q-expansion-item>
       </q-list>
     </div>
   </q-layout>
@@ -145,7 +143,7 @@ const deleteSchedule = (index: number) => {
   width: 100%;
 }
 
-.schedule-item {
+.black-border {
   border: 1px solid gray;
   border-radius: 4px;
   margin-bottom: 8px;
