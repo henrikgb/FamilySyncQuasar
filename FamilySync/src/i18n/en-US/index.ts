@@ -1,7 +1,9 @@
-// This is just an example,
-// so you can safely delete all default props below
-
 export default {
-  failed: 'Action failed',
-  success: 'Action was successful'
+  homePage: {
+    welcomeMessage: 'Welcome to the homepage!',
+    description: 'This is a sample text for the homepage.'
+  },
+  settingsPage: {
+    title: 'Settings Page'
+  }
 };

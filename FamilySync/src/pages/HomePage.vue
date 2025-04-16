@@ -2,8 +2,8 @@
   <q-page class="column items-center q-pt-xl q-px-md">
 
     <div class="text-center q-mb-lg">
-      <p class="text-h6 q-mb-xs">Welcome to the FamilySync app.</p>
-      <p class="text-subtitle2">The place where you can plan and schedule daily tasks with your loved ones.</p>
+      <p class="text-h6 q-mb-xs">{{ $t('homePage.welcomeMessage') }}</p>
+      <p class="text-subtitle2">{{ $t('homePage.description') }}</p>
     </div>
 
     <div class="column q-gutter-md" style="width: 100%; max-width: 400px;">
