@@ -6,6 +6,10 @@ import { fileURLToPath } from 'node:url';
 
 export default defineConfig((ctx) => {
   return {
+    env: {
+      VITE_API_BASE: process.env.VITE_API_BASE,
+    },
+
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
     // preFetch: true,
 
@@ -59,9 +63,7 @@ export default defineConfig((ctx) => {
 
       // publicPath: '/',
       // analyze: true,
-      env: {
-        VITE_API_BASE: process.env.VITE_API_BASE,
-      },
+      // env: {},
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
