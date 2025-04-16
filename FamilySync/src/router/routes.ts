@@ -40,7 +40,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: PATHS.SHOPPING_LIST,
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/ShoppingListPage.vue') }],
+    children: [{ path: '', component: () => import('src/pages/shoppingList/ShoppingListPage.vue') }],
   },
   {
     path: PATHS.TODO_LIST,
