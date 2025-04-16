@@ -38,7 +38,16 @@
       </div>
     </div>
 
-    <div class="q-mt-lg bg-yellow-3 rounded-borders q-pa-md">
+     <!-- Show a loading spinner while data is being fetched -->
+     <div v-if="isLoading" class="text-center q-mt-lg">
+      <q-spinner color="teal" size="50px" />
+      <div class="w-full">
+        <text-h4>Loading</text-h4>
+      </div>
+    </div>
+
+    <!-- Display calendar items when data is loaded -->
+    <div v-else class="q-mt-lg bg-yellow-3 rounded-borders q-pa-md">
       <h6 class="q-my-sm">Scheduled Events:</h6>
       <q-list>
         <q-expansion-item
@@ -75,42 +84,62 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { calendarSchedule } from 'src/assets/CalendarSchedule'
-import type { ScheduleItem } from 'src/assets/CalendarSchedule'
+import { useCalendarSchedule, useUpdateCalendarSchedule } from 'src/queries/useCalendarSchedule'
+import type { CalendarScheduleItemDTO } from 'src/dto/CalendarScheduleDTO'
 import { Notify } from 'quasar'
+
+const { data: calendarSchedule, isLoading } = useCalendarSchedule()
+const updateCalendarSchedule = useUpdateCalendarSchedule()
 
 const defaultDate = new Date().toISOString().split('T')?.[0]?.replace(/-/g, '/') ?? ''
 const date = ref(defaultDate)
 const description = ref('')
 
 const sortedSchedules = computed(() => {
-  return [...calendarSchedule.value].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+  return [...(calendarSchedule.value ?? [])].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 })
 
 const groupedScheduleItems = computed(() => {
-  const groups: Record<string, ScheduleItem[]> = {}
+  const groups: Record<string, CalendarScheduleItemDTO[]> = {}
   sortedSchedules.value.forEach(scheduleItem => {
-    const date = new Date(scheduleItem.date)
-    const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
-    if (!groups[key]) {
-      groups[key] = []
-    }
+    const d = new Date(scheduleItem.date)
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
+    if (!groups[key]) groups[key] = []
     groups[key].push(scheduleItem)
   })
   return groups
 })
 
-const saveScheduleItem = () => {
+const saveScheduleItem = async () => {
+  if (!calendarSchedule.value) return
+
   if (date.value && description.value) {
-    calendarSchedule.value.push({ date: date.value, description: description.value })
-    date.value = defaultDate
-    description.value = ''
-    Notify.create({
-      message: 'Schedule item saved successfully!',
-      color: 'green',
-      icon: 'check_circle',
-      position: 'top'
-    })
+    const newList: CalendarScheduleItemDTO[] = [
+      ...calendarSchedule.value,
+      {
+        date: date.value,
+        description: description.value
+      }
+    ]
+
+    try {
+      await updateCalendarSchedule.mutateAsync(newList)
+      date.value = defaultDate
+      description.value = ''
+      Notify.create({
+        message: 'Schedule item saved successfully!',
+        color: 'green',
+        icon: 'check_circle',
+        position: 'top'
+      })
+    } catch {
+      Notify.create({
+        message: 'Failed to save item.',
+        color: 'red',
+        icon: 'error',
+        position: 'top'
+      })
+    }
   } else {
     Notify.create({
       message: 'Please fill in both the date and description.',
@@ -121,29 +150,32 @@ const saveScheduleItem = () => {
   }
 }
 
-const deleteScheduleItem = (scheduleItemToDelete: ScheduleItem) => {
-  const index = calendarSchedule.value.findIndex(
-    (scheduleItem) =>
-    scheduleItem.date === scheduleItemToDelete.date &&
-    scheduleItem.description === scheduleItemToDelete.description
+const deleteScheduleItem = async (scheduleItem: CalendarScheduleItemDTO) => {
+  if (!calendarSchedule.value) return
+
+  const newList = calendarSchedule.value.filter(
+    (item: CalendarScheduleItemDTO) =>
+      item.date !== scheduleItem.date || item.description !== scheduleItem.description
   )
-  if (index !== -1) {
-    calendarSchedule.value.splice(index, 1)
+
+  try {
+    await updateCalendarSchedule.mutateAsync(newList)
     Notify.create({
       message: 'Schedule item deleted successfully!',
       color: 'green',
       icon: 'delete',
       position: 'top'
     })
-  } else {
+  } catch {
     Notify.create({
-      message: 'Failed to delete schedule item.',
+      message: 'Failed to delete item.',
       color: 'red',
       icon: 'error',
       position: 'top'
     })
   }
 }
+
 </script>
 
 <style scoped>
