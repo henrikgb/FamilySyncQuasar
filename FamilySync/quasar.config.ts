@@ -59,7 +59,9 @@ export default defineConfig((ctx) => {
 
       // publicPath: '/',
       // analyze: true,
-      // env: {},
+      env: {
+        VITE_API_BASE: process.env.VITE_API_BASE,
+      }
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
