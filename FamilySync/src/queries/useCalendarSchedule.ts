@@ -4,7 +4,6 @@ import { API_BASE } from 'src/constants/api';
 import type { CalendarScheduleDTO } from 'src/dto/CalendarScheduleDTO';
 
 export function useCalendarSchedule() {
-  console.log('API_BASE', API_BASE);
   return useQuery({
     queryKey: ['calendarSchedule'],
     queryFn: async () => {
