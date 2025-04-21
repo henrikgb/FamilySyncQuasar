@@ -17,7 +17,7 @@ export function useShoppingList() {
 export function useUpdateShoppingList() {
   return useMutation({
     mutationFn: async (updatedShoppingList: ShoppingListDTO) => {
-      await axios.post(`${API_BASE}/shoppingList/updatedShoppingList`, updatedShoppingList)
+      await axios.post(`${API_BASE}/ShoppingList`, updatedShoppingList)
     },
   })
 }
