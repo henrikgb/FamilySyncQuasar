@@ -1,31 +1,31 @@
 <template>
   <div class="bg-yellow-3 q-pa-md rounded-borders w-100">
-    <h6 class="q-my-sm">Add Items</h6>
+    <h6 class="q-my-sm">{{ t('shoppingListPage.title') }}</h6>
 
     <!-- Name input (required) -->
     <q-input
       v-model="name"
-      label="Hva vil du kjøpe?"
+      :label="whatDoYouWantToBuy"
       filled
       class="q-mb-sm"
-      :rules="[val => !!val || 'Name on shopping list item is required']"
+      :rules="[val => !!val || nameOnShoppingListItemIsRequired]"
     />
 
     <!-- Quantity input (default = 1, must be > 0) -->
     <q-input
       v-model.number="quantity"
       type="number"
-      label="Quantity"
+      :label="itemQuantity"
       filled
       class="q-mb-sm"
-      :rules="[val => val > 0 || 'Quantity must be a positive number greater than 0']"
+      :rules="[val => val > 0 || quantityRequired]"
     />
 
     <!-- Category select (optional, default fallback handled in script) -->
     <q-select
       v-model="category"
       :options="categories"
-      label="Category"
+      :label="itemCategory"
       filled
       class="q-mb-sm"
       emit-value
@@ -47,10 +47,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useShoppingList, useUpdateShoppingList } from 'src/queries/useShoppingList'
 import type { ShoppingListItemDTO } from 'src/dto/ShoppingListDTO'
 import { Notify } from 'quasar'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
+// Text on page
+const whatDoYouWantToBuy = computed(() => t('shoppingListPage.whatDoYouWantToBuy'))
+const nameOnShoppingListItemIsRequired = computed(() => t('shoppingListPage.nameIsRequired'))
+const itemQuantity = computed(() => t('shoppingListPage.quantity'))
+const quantityRequired = computed(() => t('shoppingListPage.quantityMustBePositive'))
+const itemCategory = computed(() => t('shoppingListPage.category'))
 
 // Form state
 const name = ref('')
@@ -61,6 +70,7 @@ const category = ref('')
 const categories = [
   'Grønnsaker & Frukt',
   'Kjøtt & Pålegg',
+  'Meieriprodukter',
   'Diverse',
   'Husholdning',
   'Drikke',
