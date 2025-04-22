@@ -28,6 +28,7 @@
           transition-prev="jump-up"
           transition-next="jump-up"
           class="bg-yellow-3 rounded-borders"
+          style="width: 360px;"
         >
           <!-- Dynamically generate a tab panel for each date -->
           <q-tab-panel
