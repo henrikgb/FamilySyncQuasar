@@ -5,8 +5,8 @@
         <q-btn
           @click="setViewCalendarView"
           class="glossy"
-          :color="isViewCalendar ? 'white' : 'primary'"
-          :text-color="isViewCalendar ? 'primary' : 'white'"
+          :color="isViewCalendar ? 'white' : 'teal'"
+          :text-color="isViewCalendar ? 'teal' : 'white'"
           icon-right="event_available"
           label="View calendar"
         />
