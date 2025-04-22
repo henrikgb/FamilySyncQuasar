@@ -68,9 +68,11 @@ const category = ref('')
 
 // Example category options
 const categories = [
+  'Bakervarer',
   'Grønnsaker & Frukt',
   'Kjøtt & Pålegg',
   'Meieriprodukter',
+  'Frysevarer',
   'Diverse',
   'Husholdning',
   'Drikke',
