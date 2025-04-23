@@ -1,6 +1,11 @@
 <template>
   <div class="bg-yellow-3 q-pa-md rounded-borders w-100">
-    <div v-if="isLoading">Laster handleliste...</div>
+    <div v-if="isLoading" class="text-center q-mt-lg">
+      <q-spinner color="teal" size="50px" />
+      <div class="w-full">
+        <text-h4>Loading</text-h4>
+      </div>
+    </div>
 
     <div v-else>
       <q-card
