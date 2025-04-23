@@ -1,5 +1,6 @@
 export interface TodoListItemDTO {
-  title: string,
+  task: string,
+  category: string,
   isCompleted: boolean,
 }
 

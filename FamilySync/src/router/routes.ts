@@ -45,7 +45,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: PATHS.TODO_LIST,
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/TodoListPage.vue') }],
+    children: [{ path: '', component: () => import('src/pages/todoList/TodoListPage.vue') }],
   },
   {
     path: PATHS.SETTINGS,

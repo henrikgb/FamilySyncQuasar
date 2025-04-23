@@ -13,6 +13,13 @@ export default {
     addItem: "Legg til element",
     shoppingList: "Handleliste",
   },
+  todoListPage: {
+    addTodoListItem: "Legg til oppgave i todo-listen",
+    describeYourTask: "Beskriv oppgaven din",
+    taskDescriptionIsRequired: "Oppgavebeskrivelse er påkrevd",
+    category: "Kategori",
+    addTask: "Legg til oppgave",
+  },
   settingsPage: {
     title: 'Innstillingssiden'
   }

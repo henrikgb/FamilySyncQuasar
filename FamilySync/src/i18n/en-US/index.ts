@@ -13,6 +13,13 @@ export default {
     addItem: "Add Item",
     shoppingList: "Shopping List",
   },
+  todoListPage: {
+    addTodoListItem: "Add task to the todo list",
+    describeYourTask: "Describe your task",
+    taskDescriptionIsRequired: "Task description is required",
+    category: "Category",
+    addTask: "Add Task",
+  },
   settingsPage: {
     title: 'Settings Page'
   }
