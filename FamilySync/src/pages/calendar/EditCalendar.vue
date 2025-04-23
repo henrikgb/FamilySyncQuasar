@@ -39,7 +39,7 @@
         <q-btn
           class="q-mt-md"
           label="Save"
-          color="primary"
+          color="teal"
           @click="saveScheduleItem"
         />
       </div>
