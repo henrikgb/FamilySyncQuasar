@@ -11,6 +11,7 @@ export default {
     quantityMustBePositive: "Quantity must be a positive number greater than 0",
     category: "Category",
     addItem: "Add Item",
+    shoppingList: "Shopping List",
   },
   settingsPage: {
     title: 'Settings Page'

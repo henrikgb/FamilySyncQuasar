@@ -6,8 +6,8 @@
         <text-h4>Loading</text-h4>
       </div>
     </div>
-
     <div v-else>
+      <h6 class="q-my-sm">{{ $t('shoppingListPage.shoppingList') }}:</h6>
       <q-card
         v-for="(items, category) in groupedItems"
         :key="category"

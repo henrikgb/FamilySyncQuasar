@@ -11,6 +11,7 @@ export default {
     quantityMustBePositive: "Mengde må være et positivt tall større enn 0",
     category: "Kategori",
     addItem: "Legg til element",
+    shoppingList: "Handleliste",
   },
   settingsPage: {
     title: 'Innstillingssiden'
