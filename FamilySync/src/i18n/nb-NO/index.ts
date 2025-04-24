@@ -19,6 +19,7 @@ export default {
     taskDescriptionIsRequired: "Oppgavebeskrivelse er påkrevd",
     category: "Kategori",
     addTask: "Legg til oppgave",
+    todoList: "Todo-liste",
   },
   settingsPage: {
     title: 'Innstillingssiden'

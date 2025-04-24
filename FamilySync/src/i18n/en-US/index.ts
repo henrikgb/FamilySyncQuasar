@@ -19,6 +19,7 @@ export default {
     taskDescriptionIsRequired: "Task description is required",
     category: "Category",
     addTask: "Add Task",
+    todoList: "Todo List",
   },
   settingsPage: {
     title: 'Settings Page'
