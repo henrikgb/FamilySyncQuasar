@@ -13,7 +13,12 @@
         :key="category"
         class="q-mb-md bg-yellow-2"
       >
-        <q-expansion-item :label="category" expand-separator>
+      <q-expansion-item
+        :label="`${category} [${$t('total')}: ${tasks.length} |
+        ${$t('completed')}: ${tasks.filter(task => task.isCompleted).length} |
+        ${$t('remaining')}: ${tasks.filter(task => !task.isCompleted).length}]`"
+        expand-separator
+      >
           <q-card-section
             v-for="task in tasks"
             :key="task.task + task.category"

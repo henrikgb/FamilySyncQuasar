@@ -23,5 +23,8 @@ export default {
   },
   settingsPage: {
     title: 'Settings Page'
-  }
+  },
+  total: 'Total',
+  remaining: 'Remaining',
+  completed: 'Completed',
 };
