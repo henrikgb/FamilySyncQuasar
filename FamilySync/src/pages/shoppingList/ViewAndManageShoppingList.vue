@@ -13,7 +13,13 @@
         :key="category"
         class="q-mb-md bg-yellow-2"
       >
-        <q-expansion-item :label="category" expand-separator>
+      <q-expansion-item
+        :label="`${category.toUpperCase()} -
+        🛒 ${items.length} |
+        ✅ ${items.filter(item => item.isCompleted).length} |
+        ⏳ ${items.filter(item => !item.isCompleted).length}`"
+        expand-separator
+      >
           <q-card-section
             v-for="item in items"
             :key="item.name + item.category"

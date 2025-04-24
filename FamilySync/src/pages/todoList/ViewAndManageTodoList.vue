@@ -14,9 +14,10 @@
         class="q-mb-md bg-yellow-2"
       >
       <q-expansion-item
-        :label="`${category} [${$t('total')}: ${tasks.length} |
-        ${$t('completed')}: ${tasks.filter(task => task.isCompleted).length} |
-        ${$t('remaining')}: ${tasks.filter(task => !task.isCompleted).length}]`"
+        :label="`${category.toUpperCase()} -
+        📝 ${tasks.length} |
+        ✅ ${tasks.filter(task => task.isCompleted).length} |
+        ⏳ ${tasks.filter(task => !task.isCompleted).length}`"
         expand-separator
       >
           <q-card-section
