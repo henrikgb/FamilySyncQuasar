@@ -1,77 +1,32 @@
 <template>
   <q-page class="column items-center q-pt-xl q-px-md">
-
     <div class="text-center q-mb-lg">
-      <p class="text-h6 q-mb-xs">{{ $t('homePage.welcomeMessage') }}</p>
-      <p class="text-subtitle2">{{ $t('homePage.description') }}</p>
+      <p class="text-h2 q-mb-xs">FamilySync</p>
     </div>
 
-    <div class="column q-gutter-md" style="width: 100%; max-width: 400px;">
-      <q-btn
-        outline
-        class="q-pa-md"
-        style="justify-start"
-        @click="handleRouteChange(PATHS.CALENDAR)"
+    <div class="row q-col-gutter-md justify-center" style="max-width: 600px;">
+      <div
+        v-for="(item, index) in homeItems"
+        :key="index"
+        class="col-6"
       >
-        <template #default>
-          <div class="row items-center no-wrap full-width">
-            <q-icon name="event" />
-            <div class="text-left ellipsis q-ml-sm">
-              Schedule your appointments
-            </div>
+        <q-card
+          class="q-pa-sm q-mb-md cursor-pointer full-width bg-yellow-3"
+          flat
+          bordered
+          @click="handleRouteChange(item.route)"
+        >
+          <q-img
+            :src="item.img"
+            ratio="1"
+            class="rounded-borders"
+          />
+          <div class="text-center text-subtitle2 q-mt-sm">
+            {{ item.label }}
           </div>
-        </template>
-      </q-btn>
-
-      <q-btn
-        outline
-        class="q-pa-md"
-        style="justify-start"
-        @click="handleRouteChange(PATHS.SHOPPING_LIST)"
-      >
-        <template #default>
-          <div class="row items-center no-wrap full-width">
-            <q-icon name="shopping_cart" />
-            <div class="text-left ellipsis q-ml-sm">
-              Plan your grocery shopping
-            </div>
-          </div>
-        </template>
-      </q-btn>
-
-      <q-btn
-        outline
-        class="q-pa-md"
-        style="justify-start"
-        @click="handleRouteChange(PATHS.TODO_LIST)"
-      >
-        <template #default>
-          <div class="row items-center no-wrap full-width">
-            <q-icon name="checklist" />
-            <div class="text-left ellipsis q-ml-sm">
-              Plan your to-do-lists
-            </div>
-          </div>
-        </template>
-      </q-btn>
-
-      <q-btn
-        outline
-        class="q-pa-md"
-        style="justify-start"
-        @click="handleRouteChange(PATHS.SETTINGS)"
-      >
-        <template #default>
-          <div class="row items-center no-wrap full-width">
-            <q-icon name="tune" />
-            <div class="text-left ellipsis q-ml-sm">
-              Adjust app settings
-            </div>
-          </div>
-        </template>
-      </q-btn>
+        </q-card>
+      </div>
     </div>
-
   </q-page>
 </template>
 
@@ -79,4 +34,31 @@
 <script setup lang="ts">
 import { useHandleRouteChange, PATHS } from 'src/router/routes'
 const { handleRouteChange } = useHandleRouteChange()
+import CalendarCat from 'src/assets/CalendarCat.png'
+import ShoppingCat from 'src/assets/ShoppingCat.png'
+import TodoCat from 'src/assets/TodoCat.png'
+import SettingsCat from 'src/assets/SettingsCat.png'
+
+const homeItems = [
+  {
+    label: 'Calendar',
+    img: CalendarCat,
+    route: PATHS.CALENDAR,
+  },
+  {
+    label: 'ShoppingList',
+    img: ShoppingCat,
+    route: PATHS.SHOPPING_LIST,
+  },
+  {
+    label: 'TodoList',
+    img: TodoCat,
+    route: PATHS.TODO_LIST,
+  },
+  {
+    label: 'Settings',
+    img: SettingsCat,
+    route: PATHS.SETTINGS,
+  },
+]
 </script>
