@@ -1,33 +1,35 @@
 <template>
-  <q-page class="column items-center q-pt-xl q-px-md">
-    <div class="text-center q-mb-lg">
-      <p class="text-h2 q-mb-xs">FamilySync</p>
-    </div>
-
-    <div class="row q-col-gutter-md justify-center" style="max-width: 600px;">
-      <div
-        v-for="(item, index) in homeItems"
-        :key="index"
-        class="col-6"
-      >
-        <q-card
-          class="q-pa-sm q-mb-md cursor-pointer full-width bg-yellow-3"
-          flat
-          bordered
-          @click="handleRouteChange(item.route)"
-        >
-          <q-img
-            :src="item.img"
-            ratio="1"
-            class="rounded-borders"
-          />
-          <div class="text-center text-subtitle2 q-mt-sm">
-            {{ item.label }}
-          </div>
-        </q-card>
+  <q-layout class="q-px-lg q-py-lg">
+    <q-page class="column items-center q-pt-sm q-px-md">
+      <div class="text-center q-mb-lg">
+        <p class="text-h2 q-mb-xs">FamilySync</p>
       </div>
-    </div>
-  </q-page>
+
+      <div class="row q-col-gutter-md justify-center" style="max-width: 600px;">
+        <div
+          v-for="(item, index) in homeItems"
+          :key="index"
+          class="col-6"
+        >
+          <q-card
+            class="q-pa-sm q-mb-md cursor-pointer full-width bg-yellow-3"
+            flat
+            bordered
+            @click="handleRouteChange(item.route)"
+          >
+            <q-img
+              :src="item.img"
+              ratio="1"
+              class="rounded-borders"
+            />
+            <div class="text-center text-subtitle2 q-mt-sm">
+              {{ item.label }}
+            </div>
+          </q-card>
+        </div>
+      </div>
+    </q-page>
+  </q-layout>
 </template>
 
 

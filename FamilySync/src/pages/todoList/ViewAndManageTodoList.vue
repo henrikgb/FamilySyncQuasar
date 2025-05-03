@@ -7,7 +7,7 @@
       </div>
     </div>
     <div v-else>
-      <h6 class="q-my-sm">{{ $t('todoListPage.todoList') }}:</h6>
+      <h6 class="q-my-sm">{{ t('todoListPage.todoList') }}:</h6>
       <q-card
         v-for="(tasks, category) in groupedTasks"
         :key="category"
@@ -61,6 +61,9 @@ import { ref, computed, watchEffect } from 'vue'
 import { useTodoList, useUpdateTodoList } from 'src/queries/useTodoList'
 import type { TodoListItemDTO } from 'src/dto/TodoListDTO'
 import { Notify } from 'quasar'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const { data: todoList, isLoading } = useTodoList()
 const updateTodoList = useUpdateTodoList()

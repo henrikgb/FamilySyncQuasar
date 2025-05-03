@@ -7,7 +7,7 @@
       </div>
     </div>
     <div v-else>
-      <h6 class="q-my-sm">{{ $t('shoppingListPage.shoppingList') }}:</h6>
+      <h6 class="q-my-sm">{{ t('shoppingListPage.shoppingList') }}:</h6>
       <q-card
         v-for="(items, category) in groupedItems"
         :key="category"
@@ -58,11 +58,12 @@
 
 <script setup lang="ts">
 import { ref, computed, watchEffect } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useShoppingList, useUpdateShoppingList } from 'src/queries/useShoppingList'
 import type { ShoppingListItemDTO } from 'src/dto/ShoppingListDTO'
 import { Notify } from 'quasar'
-
 const { data: shoppingList, isLoading } = useShoppingList()
+const { t } = useI18n()
 const updateShoppingList = useUpdateShoppingList()
 
 const localList = ref<ShoppingListItemDTO[]>([])

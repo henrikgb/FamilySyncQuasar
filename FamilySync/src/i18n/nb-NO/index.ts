@@ -3,8 +3,17 @@ export default {
     welcomeMessage: 'Velkommen til hjemmesiden!',
     description: 'Dette er en eksempeltekst for hjemmesiden.'
   },
+  calendarPage: {
+    title: "FamilyCalendar",
+    viewCalendar: "Se kalender",
+    editCalendar: "Rediger kalender",
+    enterDate: "Skriv inn dato",
+    enterDescription: "Skriv inn beskrivelse",
+    scheduledEvents: "Planlagte hendelser",
+    save: "Lagre",
+  },
   shoppingListPage: {
-    title: "Legg element til handleliste",
+    title: "FamilyShopping",
     whatDoYouWantToBuy: "Hva vil du kjøpe?",
     nameIsRequired: "Navn på handlelisteelement er påkrevd",
     quantity: "Mengde",
@@ -14,6 +23,7 @@ export default {
     shoppingList: "Handleliste",
   },
   todoListPage: {
+    title: "FamilyTodo",
     addTodoListItem: "Legg til oppgave i todo-listen",
     describeYourTask: "Beskriv oppgaven din",
     taskDescriptionIsRequired: "Oppgavebeskrivelse er påkrevd",
@@ -22,7 +32,9 @@ export default {
     todoList: "Todo-liste",
   },
   settingsPage: {
-    title: 'Innstillingssiden'
+    title: 'Innstillinger',
+    login: 'Logg inn',
+    selectLanguage: 'Velg språk',
   },
   total: 'Totalt',
   remaining: 'Gjenstående',

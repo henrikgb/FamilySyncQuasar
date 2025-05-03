@@ -2,7 +2,7 @@
   <q-layout class="q-px-lg q-py-lg">
     <!-- Form for adding new schedule item -->
     <div class="w-100 bg-yellow-3 rounded-borders q-pa-md">
-      <h6 class="q-my-sm">Enter date:</h6>
+      <h6 class="q-my-sm">{{ t('calendarPage.enterDate') }}:</h6>
       <!-- Date input with popup calendar -->
       <q-input
         filled
@@ -25,7 +25,7 @@
         </template>
       </q-input>
 
-      <h6 class="q-my-sm">Enter description:</h6>
+      <h6 class="q-my-sm">{{ t('calendarPage.enterDescription') }}:</h6>
       <!-- Description textarea input -->
       <q-input
         v-model="description"
@@ -55,7 +55,7 @@
 
     <!-- Show saved calendar items grouped by month -->
     <div v-else class="q-mt-lg bg-yellow-3 rounded-borders q-pa-md">
-      <h6 class="q-my-sm">Scheduled Events:</h6>
+      <h6 class="q-my-sm">{{ t('calendarPage.scheduledEvents') }}:</h6>
       <q-list>
         <!-- Expansion group for each month -->
         <q-expansion-item
@@ -97,6 +97,8 @@ import { ref, computed } from 'vue'
 import { useCalendarSchedule, useUpdateCalendarSchedule } from 'src/queries/useCalendarSchedule'
 import type { CalendarScheduleItemDTO } from 'src/dto/CalendarScheduleDTO'
 import { Notify } from 'quasar'
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n()
 
 // Fetch schedule data and loading state using TanStack Query
 const { data: calendarSchedule, isLoading } = useCalendarSchedule()

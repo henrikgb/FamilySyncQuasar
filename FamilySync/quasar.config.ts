@@ -16,6 +16,7 @@ export default defineConfig((ctx) => {
       'i18n',
       'axios',
       'vueQuery',
+      'msal',
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#css
@@ -50,7 +51,7 @@ export default defineConfig((ctx) => {
         // extendTsConfig (tsConfig) {}
       },
 
-      vueRouterMode: 'hash', // available values: 'hash', 'history'
+      vueRouterMode: 'history', // available values: 'hash', 'history'
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
