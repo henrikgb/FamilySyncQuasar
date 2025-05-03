@@ -4,7 +4,7 @@ export default {
     description: 'Dette er en eksempeltekst for hjemmesiden.'
   },
   calendarPage: {
-    title: "FamilyCalendar",
+    title: "Kalender",
     viewCalendar: "Se kalender",
     editCalendar: "Rediger kalender",
     enterDate: "Skriv inn dato",
@@ -13,7 +13,7 @@ export default {
     save: "Lagre",
   },
   shoppingListPage: {
-    title: "FamilyShopping",
+    title: "Handleliste",
     whatDoYouWantToBuy: "Hva vil du kjøpe?",
     nameIsRequired: "Navn på handlelisteelement er påkrevd",
     quantity: "Mengde",
@@ -23,7 +23,7 @@ export default {
     shoppingList: "Handleliste",
   },
   todoListPage: {
-    title: "FamilyTodo",
+    title: "Todo-liste",
     addTodoListItem: "Legg til oppgave i todo-listen",
     describeYourTask: "Beskriv oppgaven din",
     taskDescriptionIsRequired: "Oppgavebeskrivelse er påkrevd",

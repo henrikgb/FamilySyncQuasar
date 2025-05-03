@@ -4,7 +4,7 @@ export default {
     description: 'This is a sample text for the homepage.'
   },
   calendarPage: {
-    title: "FamilyCalendar",
+    title: "Calendar",
     viewCalendar: "View Calendar",
     editCalendar: "Edit Calendar",
     enterDate: "Enter Date",
@@ -13,7 +13,7 @@ export default {
     save: "Save",
   },
   shoppingListPage: {
-    title: "FamilyShopping",
+    title: "Shopping",
     whatDoYouWantToBuy: "What do you want to buy?",
     nameIsRequired: "Name on shopping list item is required",
     quantity: "Quantity",
@@ -23,7 +23,7 @@ export default {
     shoppingList: "Shopping List",
   },
   todoListPage: {
-    title: "FamilyTodo",
+    title: "Todo List",
     addTodoListItem: "Add task to the todo list",
     describeYourTask: "Describe your task",
     taskDescriptionIsRequired: "Task description is required",
