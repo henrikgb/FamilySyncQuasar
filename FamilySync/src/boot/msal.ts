@@ -21,11 +21,19 @@ export const msalInstance = new PublicClientApplication(msalConfig);
 
 export default boot(async ({ app }) => {
   await msalInstance.initialize();
+
+  const response = await msalInstance.handleRedirectPromise();
+
+  if (response?.account) {
+    msalInstance.setActiveAccount(response.account);
+  }
+
+  const targetUrl = sessionStorage.getItem('postLoginRedirect');
+  if (targetUrl) {
+    sessionStorage.removeItem('postLoginRedirect');
+    window.location.href = targetUrl; // Redirect after login
+  }
+
   app.config.globalProperties.$msal = msalInstance;
 });
 
-declare module '@vue/runtime-core' {
-  interface ComponentCustomProperties {
-    $msal: PublicClientApplication;
-  }
-}

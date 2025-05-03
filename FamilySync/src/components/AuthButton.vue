@@ -42,6 +42,7 @@ onMounted(async () => {
 });
 
 const login = () => {
+  sessionStorage.setItem('postLoginRedirect', '/#/settings');
   void msal.loginRedirect();
 };
 
