@@ -1,5 +1,5 @@
 <template>
-  <q-layout class="q-px-lg q-py-lg">
+  <q-layout class="q-py-lg">
     <!-- Show a loading spinner while data is being fetched -->
     <div v-if="isLoading" class="text-center q-mt-lg">
       <q-spinner color="teal" size="50px" />

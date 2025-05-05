@@ -1,5 +1,5 @@
 <template>
-  <q-layout class="q-px-lg q-py-lg">
+  <q-layout class="q-py-lg">
     <!-- Form for adding new schedule item -->
     <div class="w-100 bg-yellow-3 rounded-borders q-pa-md">
       <h6 class="q-my-sm">{{ t('calendarPage.enterDate') }}:</h6>
