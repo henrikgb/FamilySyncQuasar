@@ -19,7 +19,9 @@ const msalConfig: Configuration = {
 
 export const msalInstance = new PublicClientApplication(msalConfig);
 
-export default boot(async ({ app }) => {
+export default boot(async ({ app, router }) => {
+  // Use the router instance passed from the boot context
+
   await msalInstance.initialize();
 
   const response = await msalInstance.handleRedirectPromise();
@@ -31,9 +33,8 @@ export default boot(async ({ app }) => {
   const targetUrl = sessionStorage.getItem('postLoginRedirect');
   if (targetUrl) {
     sessionStorage.removeItem('postLoginRedirect');
-    window.location.href = targetUrl; // Redirect after login
+    await router.push(targetUrl);
   }
 
   app.config.globalProperties.$msal = msalInstance;
 });
-

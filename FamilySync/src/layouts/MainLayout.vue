@@ -35,29 +35,29 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
-import { useHandleRouteChange, PATHS } from 'src/router/routes'
+import { useRoute, useRouter } from 'vue-router'
+import { PATHS } from 'src/router/routes'
 
 // Reactive model for the toolbar's active state
 const model = ref(PATHS.HOME)
 
-// Get the current route
+// Get the current route and router
 const route = useRoute()
-
-// Import the route change handler
-const { handleRouteChange } = useHandleRouteChange()
+const router = useRouter()
 
 // Watch for route changes and update the toolbar's active state
 watch(
   () => route.path,
   (newPath) => {
-    model.value = newPath
-  }
+    model.value = newPath // Synchronize the model with the current route
+  },
+  { immediate: true } // Ensure the model is updated on initial load
 )
 
 // Handle toolbar route changes
-const handleToolbarRouteChange = (newPath: string) => {
-  handleRouteChange(newPath)
+const handleToolbarRouteChange = async (newPath: string) => {
+  if (newPath !== route.path) {
+    await router.push(newPath) // Navigate to the selected route
+  }
 }
-
 </script>

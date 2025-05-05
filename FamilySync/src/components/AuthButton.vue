@@ -20,6 +20,7 @@
 
 <script setup lang="ts">
 import { getCurrentInstance, ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import type { AccountInfo } from '@azure/msal-browser';
 
 const { appContext } = getCurrentInstance()!;
@@ -27,6 +28,7 @@ const msal = appContext.config.globalProperties.$msal;
 
 const isLoggedIn = ref(false);
 const username = ref('');
+const router = useRouter();
 
 onMounted(async () => {
   const result = await msal.handleRedirectPromise();
@@ -42,7 +44,8 @@ onMounted(async () => {
 });
 
 const login = () => {
-  sessionStorage.setItem('postLoginRedirect', '/#/settings');
+  // Dynamically set the post-login redirect to the current route
+  sessionStorage.setItem('postLoginRedirect', router.currentRoute.value.fullPath);
   void msal.loginRedirect();
 };
 
