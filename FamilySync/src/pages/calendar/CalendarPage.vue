@@ -6,7 +6,7 @@
       </div>
 
       <div v-if="isAuthenticated">
-        <div class="row justify-center item-center q-gutter-x-sm q-gutter-y-sm q-mb-sm">
+        <div class="row justify-center item-center q-gutter-x-sm q-gutter-y-sm q-mb-sm no-wrap">
           <q-btn
             @click="setViewCalendarView"
             class="glossy"
