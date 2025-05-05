@@ -5,8 +5,7 @@
         <p class="text-h2 q-mb-xs">{{ t('settingsPage.title') }}</p>
       </div>
 
-      <div class="w-full bg-yellow-3 q-mt-md q-px-md q-py-sm rounded-borders">
-        <p class="text-h5 q-mb-xs">{{ t('settingsPage.login') }}:</p>
+      <div class="w-full bg-yellow-3 q-px-md q-py-md rounded-borders">
         <AuthButton />
       </div>
 

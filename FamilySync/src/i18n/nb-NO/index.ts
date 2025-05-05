@@ -33,7 +33,9 @@ export default {
   },
   settingsPage: {
     title: 'Innstillinger',
-    login: 'Logg inn',
+    login: 'Logg inn med Microsoft',
+    logout: 'Logg ut',
+    welcome: 'Velkommen',
     selectLanguage: 'Velg språk',
   },
   total: 'Totalt',

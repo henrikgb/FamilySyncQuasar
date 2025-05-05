@@ -1,17 +1,18 @@
 <template>
-  <div class="q-mb-lg">
+  <div>
     <q-btn
       v-if="!isLoggedIn"
-      label="Login with Microsoft"
-      color="primary"
+      :label="t('settingsPage.login')"
+      color="teal"
+      class="glossy"
       @click="login"
     />
-    <div v-else class="column items-center">
-      <div class="text-subtitle2 q-mt-sm">Welcome, {{ username }}</div>
+    <div v-else>
+      <div>{{ t('settingsPage.welcome') }}, {{ name }}</div>
       <q-btn
-        label="Logout"
+        :label="t('settingsPage.logout')"
         color="negative"
-        class="q-mt-sm"
+        class="q-mt-sm glossy"
         @click="logout"
       />
     </div>
@@ -22,12 +23,15 @@
 import { getCurrentInstance, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import type { AccountInfo } from '@azure/msal-browser';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const { appContext } = getCurrentInstance()!;
 const msal = appContext.config.globalProperties.$msal;
 
 const isLoggedIn = ref(false);
-const username = ref('');
+const name = ref('');
 const router = useRouter();
 
 onMounted(async () => {
@@ -39,7 +43,7 @@ onMounted(async () => {
   const account: AccountInfo | undefined = msal.getAllAccounts()[0];
   if (account) {
     isLoggedIn.value = true;
-    username.value = account.username;
+    name.value = account.name || account.username;
   }
 });
 

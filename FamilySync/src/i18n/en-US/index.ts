@@ -33,7 +33,9 @@ export default {
   },
   settingsPage: {
     title: 'Settings',
-    login: 'Login',
+    login: 'Login with Microsoft',
+    logout: 'Logout',
+    welcome: 'Welcome',
     selectLanguage: 'Select Language',
   },
   total: 'Total',
