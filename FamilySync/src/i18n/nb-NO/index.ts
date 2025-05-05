@@ -5,8 +5,8 @@ export default {
   },
   calendarPage: {
     title: "Kalender",
-    viewCalendar: "Se kalender",
-    editCalendar: "Rediger kalender",
+    viewCalendar: "Vis",
+    editCalendar: "Rediger",
     enterDate: "Skriv inn dato",
     enterDescription: "Skriv inn beskrivelse",
     scheduledEvents: "Planlagte hendelser",

@@ -5,8 +5,8 @@ export default {
   },
   calendarPage: {
     title: "Calendar",
-    viewCalendar: "View Calendar",
-    editCalendar: "Edit Calendar",
+    viewCalendar: "View",
+    editCalendar: "Edit",
     enterDate: "Enter Date",
     enterDescription: "Enter Description",
     scheduledEvents: "Scheduled Events",
