@@ -20,8 +20,6 @@ const msalConfig: Configuration = {
 export const msalInstance = new PublicClientApplication(msalConfig);
 
 export default boot(async ({ app, router }) => {
-  // Use the router instance passed from the boot context
-
   await msalInstance.initialize();
 
   const response = await msalInstance.handleRedirectPromise();
