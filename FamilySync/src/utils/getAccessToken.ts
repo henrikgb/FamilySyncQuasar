@@ -12,7 +12,6 @@ export async function getAccessToken(): Promise<string | null> {
     const response = await msalInstance.acquireTokenSilent({
       account,
       scopes: [`api://${import.meta.env.VITE_AZURE_CLIENT_ID}/access_as_user`]
-
     });
 
     return response.accessToken;
