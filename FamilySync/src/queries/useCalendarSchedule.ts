@@ -2,12 +2,14 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/vue-query';
 import axios from 'axios';
 import { API_BASE } from 'src/constants/api';
 import type { CalendarScheduleDTO } from 'src/dto/CalendarScheduleDTO';
-import { getAccessToken } from 'src/utils/getAccessToken';
 
 export function useCalendarSchedule() {
   return useQuery({
     queryKey: ['calendarSchedule'],
     queryFn: async () => {
+      const res = await axios.get(`${API_BASE}/calendarSchedule`);
+      /*
+      TEMPRORARY DISABLE AUTHENTICATION
       const accessToken = await getAccessToken();
       if (!accessToken) {
         throw new Error('Not authenticated');
@@ -18,6 +20,7 @@ export function useCalendarSchedule() {
           Authorization: `Bearer ${accessToken}`,
         },
       });
+      */
 
       return res.data;
     },
@@ -29,6 +32,9 @@ export function useUpdateCalendarSchedule() {
 
   return useMutation({
     mutationFn: async (updatedSchedule: CalendarScheduleDTO) => {
+      await axios.post(`${API_BASE}/calendarSchedule`, updatedSchedule)
+      /*
+      TEMPRORARY DISABLE AUTHENTICATION
       const accessToken = await getAccessToken();
       if (!accessToken) {
         throw new Error('Not authenticated');
@@ -40,6 +46,7 @@ export function useUpdateCalendarSchedule() {
           'Content-Type': 'application/json',
         },
       });
+      */
     },
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: ['calendarSchedule'] });
