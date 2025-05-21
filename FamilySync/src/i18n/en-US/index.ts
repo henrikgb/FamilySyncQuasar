@@ -38,7 +38,13 @@ export default {
     welcome: 'Welcome',
     selectLanguage: 'Select Language',
   },
+  auth: {
+    dataIsProtected: 'Data is protected by Microsoft authentication.',
+    pleaseLogin: 'Please login to access the app.',
+    goToLogin: 'Go to login',
+  },
   total: 'Total',
   remaining: 'Remaining',
   completed: 'Completed',
+  appTitle: 'FamilySync',
 };

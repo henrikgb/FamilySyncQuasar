@@ -1,9 +1,7 @@
 <template>
   <q-page class="column items-center q-pt-sm">
     <q-layout class="q-px-lg q-py-lg">
-      <div class="text-center q-mb-lg">
-        <p class="text-h2 q-mb-xs">{{ t('settingsPage.title') }}</p>
-      </div>
+      <HeaderText :title="t('settingsPage.title')" />
 
       <div class="w-full bg-yellow-3 q-px-md q-py-md rounded-borders">
         <AuthButton />
@@ -26,6 +24,7 @@
 import AuthButton from 'src/components/AuthButton.vue'
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import HeaderText from 'src/components/pageLayoutBuildingBlocks/HeaderText.vue';
 const { t } = useI18n()
 
 const { locale } = useI18n();

@@ -1,43 +1,19 @@
 <template>
   <q-page class="column items-center q-pt-sm">
     <q-layout class="q-px-lg q-py-lg">
-      <div class="text-center q-mb-lg">
-        <p class="text-h2 q-mb-xs">{{ t('calendarPage.title') }}</p>
-      </div>
+      <HeaderText :title="t('calendarPage.title')" />
 
       <div v-if="isAuthenticated">
-        <div class="row justify-center item-center q-gutter-x-sm q-gutter-y-sm q-mb-sm no-wrap">
-          <q-btn
-            @click="setViewCalendarView"
-            class="glossy"
-            :color="isViewCalendar ? 'white' : 'teal'"
-            :text-color="isViewCalendar ? 'teal' : 'white'"
-            icon-right="event_available"
-            :label="viewCalendarLabel"
-          />
-          <q-btn
-            @click="setEditCalendarView"
-            class="glossy"
-            :color="isEditCalendar ? 'white' : 'teal'"
-            :text-color="isEditCalendar ? 'teal' : 'white'"
-            icon="edit_calendar"
-            :label="editCalendarLabel"
-          />
-        </div>
-
+        <ViewAndEditButtons
+          @setViewCalendarView="val => isViewCalendar = val"
+          @setEditCalendarView="val => isEditCalendar = val"
+        />
         <EditCalendar v-if="isEditCalendar" />
         <ViewCalendar v-if="isViewCalendar" />
       </div>
 
-      <div v-else class="text-center text-grey q-mt-xl">
-        <p>{{ t('auth.pleaseLogin') }}</p>
-        <q-btn
-          label="Go to Settings"
-          color="primary"
-          flat
-          to="/settings"
-          class="q-mt-md"
-        />
+      <div v-else>
+        <DataProtectedGoToLogin />
       </div>
     </q-layout>
   </q-page>
@@ -49,24 +25,14 @@ import EditCalendar from './EditCalendar.vue';
 import ViewCalendar from './ViewCalendar.vue';
 import { useI18n } from 'vue-i18n';
 import { useAuth } from 'src/composables/useAuth';
+import DataProtectedGoToLogin from 'src/components/pageLayoutBuildingBlocks/DataProtectedGoToLogin.vue';
+import HeaderText from 'src/components/pageLayoutBuildingBlocks/HeaderText.vue';
+import ViewAndEditButtons from './ViewAndEditButtons.vue';
 
 const { t } = useI18n();
 const { isAuthenticated, loadActiveAccount } = useAuth();
-
-loadActiveAccount(); // Ensure state is rehydrated if landing here directly
-
-const viewCalendarLabel = t('calendarPage.viewCalendar');
-const editCalendarLabel = t('calendarPage.editCalendar');
-
 const isViewCalendar = ref(true);
 const isEditCalendar = ref(false);
 
-const setEditCalendarView = () => {
-  isEditCalendar.value = true;
-  isViewCalendar.value = false;
-};
-const setViewCalendarView = () => {
-  isEditCalendar.value = false;
-  isViewCalendar.value = true;
-};
+loadActiveAccount(); // Ensure state is rehydrated if landing here directly
 </script>

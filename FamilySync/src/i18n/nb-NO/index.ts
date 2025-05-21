@@ -38,7 +38,13 @@ export default {
     welcome: 'Velkommen',
     selectLanguage: 'Velg språk',
   },
+  auth: {
+    dataIsProtected: 'Data er beskyttet av Microsoft-autentisering.',
+    pleaseLogin: 'Vennligst logg inn for å få tilgang til appen.',
+    goToLogin: 'Gå til innlogging',
+  },
   total: 'Totalt',
   remaining: 'Gjenstående',
   completed: 'Fullført',
+  appTitle: 'FamilySync',
 };

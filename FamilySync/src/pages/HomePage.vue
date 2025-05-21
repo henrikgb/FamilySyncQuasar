@@ -1,9 +1,7 @@
 <template>
   <q-layout class="q-px-lg q-py-lg">
     <q-page class="column items-center q-pt-sm q-px-md">
-      <div class="text-center q-mb-lg">
-        <p class="text-h2 q-mb-xs">FamilySync</p>
-      </div>
+      <HeaderText :title="t('appTitle')" />
 
       <div class="row q-col-gutter-md justify-center" style="max-width: 600px;">
         <div
@@ -40,6 +38,10 @@ import CalendarCat from 'src/assets/CalendarCat.png'
 import ShoppingCat from 'src/assets/ShoppingCat.png'
 import TodoCat from 'src/assets/TodoCat.png'
 import SettingsCat from 'src/assets/SettingsCat.png'
+import HeaderText from 'src/components/pageLayoutBuildingBlocks/HeaderText.vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const homeItems = [
   {
