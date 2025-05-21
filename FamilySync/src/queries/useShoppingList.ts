@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/vue-query'
 import axios from 'axios'
 import { API_BASE } from 'src/constants/api'
-import type { ShoppingListDTO } from 'src/dto/ShoppingListDTO'
+import type {ShoppingListItemDTO } from 'src/dto/ShoppingListDTO'
 import { getAccessToken } from 'src/utils/getAccessToken'
 
 export function useShoppingList() {
@@ -28,7 +28,7 @@ export function useUpdateShoppingList() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (updatedShoppingList: ShoppingListDTO) => {
+    mutationFn: async (updatedShoppingList: ShoppingListItemDTO[]) => {
       await axios.post(`${API_BASE}/ShoppingList`, updatedShoppingList)
       const accessToken = await getAccessToken();
       if (!accessToken) {

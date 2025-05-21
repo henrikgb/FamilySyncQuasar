@@ -3,5 +3,3 @@ export interface TodoListItemDTO {
   category: string,
   isCompleted: boolean,
 }
-
-export type TodoListDTO = TodoListItemDTO[]

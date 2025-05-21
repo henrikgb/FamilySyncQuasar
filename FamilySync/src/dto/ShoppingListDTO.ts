@@ -4,5 +4,3 @@ export interface ShoppingListItemDTO {
   isCompleted: boolean,
   category?: string,
 }
-
-export type ShoppingListDTO = ShoppingListItemDTO[]

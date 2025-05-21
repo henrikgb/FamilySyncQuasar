@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/vue-query';
 import axios from 'axios';
 import { API_BASE } from 'src/constants/api';
-import type { CalendarScheduleDTO } from 'src/dto/CalendarScheduleDTO';
+import type { CalendarScheduleItemDTO } from 'src/dto/CalendarScheduleDTO';
 import { getAccessToken } from 'src/utils/getAccessToken';
 
 export function useCalendarSchedule() {
@@ -28,7 +28,7 @@ export function useUpdateCalendarSchedule() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (updatedSchedule: CalendarScheduleDTO) => {
+    mutationFn: async (updatedSchedule: CalendarScheduleItemDTO[]) => {
       const accessToken = await getAccessToken();
       if (!accessToken) {
         throw new Error('Not authenticated');

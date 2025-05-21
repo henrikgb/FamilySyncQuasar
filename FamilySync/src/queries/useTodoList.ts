@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/vue-query'
 import axios from 'axios'
 import { API_BASE } from 'src/constants/api'
-import type { TodoListDTO } from 'src/dto/TodoListDTO'
+import type { TodoListItemDTO } from 'src/dto/TodoListDTO'
 import { getAccessToken } from 'src/utils/getAccessToken'
 
 export function useTodoList() {
@@ -28,7 +28,7 @@ export function useUpdateTodoList() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (updatedTodos: TodoListDTO) => {
+    mutationFn: async (updatedTodos: TodoListItemDTO[]) => {
       await axios.post(`${API_BASE}/todoList`, updatedTodos)
       const accessToken = await getAccessToken();
       if (!accessToken) {
