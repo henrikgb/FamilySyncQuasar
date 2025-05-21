@@ -1,12 +1,13 @@
 <template>
   <q-layout>
-    <div>
-      <q-toolbar class="bg-teal glossy text-white shadow-2">
+    <q-toolbar class="bg-teal glossy text-white shadow-2">
+      <div class="row justify-between items-center content-wrapper">
         <img
           src="~assets/WaterMark_HGB.png"
           alt="FamilySync Logo"
-          width="42"
-          height="42"
+          width="50"
+          height="50"
+          class="q-my-sm"
         />
 
         <q-space />
@@ -25,10 +26,12 @@
           ]"
           @update:model-value="handleToolbarRouteChange"
         />
-      </q-toolbar>
-    </div>
+      </div>
+    </q-toolbar>
     <q-page-container class="bg-yellow-2">
-      <router-view />
+      <div class="content-wrapper">
+        <router-view />
+      </div>
     </q-page-container>
   </q-layout>
 </template>
@@ -61,3 +64,14 @@ const handleToolbarRouteChange = async (newPath: string) => {
   }
 }
 </script>
+
+<style scoped>
+.content-wrapper {
+  width: 100%;
+  max-width: 1280px;
+  min-width: 350px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 8px;
+}
+</style>
