@@ -6,7 +6,7 @@
         <div
             v-for="(item, index) in homeItems"
             :key="index"
-            class="col-5 q-ma-xs"
+            class="col-5 q-ma-sm"
           >
             <q-card
                 class="q-pa-sm q-mb-md cursor-pointer full-width bg-yellow-3 home-card"
@@ -53,7 +53,7 @@ const homeItems = [
 <style scoped>
 .home-grid-wrapper {
   width: 100%;
-  max-width: 520px;
+  max-width: 600px;
   min-width: 350px;
   margin: 0 auto;
   box-sizing: border-box;
