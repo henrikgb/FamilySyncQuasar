@@ -1,22 +1,20 @@
 <template>
-  <q-page class="column items-center q-pt-sm">
-    <q-layout class="q-px-lg q-py-lg">
-      <HeaderText :title="t('calendarPage.title')" />
+  <PageLayout>
+    <HeaderText :title="t('calendarPage.title')" />
 
-      <div v-if="isAuthenticated">
-        <ViewAndEditButtons
-          @setViewCalendarView="val => isViewCalendar = val"
-          @setEditCalendarView="val => isEditCalendar = val"
-        />
-        <EditCalendar v-if="isEditCalendar" />
-        <ViewCalendar v-if="isViewCalendar" />
-      </div>
+    <div v-if="isAuthenticated">
+      <ViewAndEditButtons
+        @setViewCalendarView="val => isViewCalendar = val"
+        @setEditCalendarView="val => isEditCalendar = val"
+      />
+      <EditCalendar v-if="isEditCalendar" />
+      <ViewCalendar v-if="isViewCalendar" />
+    </div>
 
-      <div v-else>
-        <DataProtectedGoToLogin />
-      </div>
-    </q-layout>
-  </q-page>
+    <div v-else>
+      <DataProtectedGoToLogin />
+    </div>
+  </PageLayout>
 </template>
 
 <script setup lang="ts">
@@ -28,6 +26,7 @@ import { useAuth } from 'src/composables/useAuth';
 import DataProtectedGoToLogin from 'src/components/pageLayoutBuildingBlocks/DataProtectedGoToLogin.vue';
 import HeaderText from 'src/components/pageLayoutBuildingBlocks/HeaderText.vue';
 import ViewAndEditButtons from './ViewAndEditButtons.vue';
+import PageLayout from 'src/components/pageLayoutBuildingBlocks/PageLayout.vue';
 
 const { t } = useI18n();
 const { isAuthenticated, loadActiveAccount } = useAuth();

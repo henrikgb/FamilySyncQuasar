@@ -1,23 +1,21 @@
 <template>
-  <q-page class="column items-center q-pt-sm">
-    <q-layout class="q-px-lg q-py-lg">
-      <HeaderText :title="t('settingsPage.title')" />
+  <PageLayout>
+    <HeaderText :title="t('settingsPage.title')" />
 
-      <div class="w-full bg-yellow-3 q-px-md q-py-md rounded-borders">
-        <AuthButton />
-      </div>
+    <div class="w-full bg-yellow-3 q-px-md q-py-md rounded-borders">
+      <AuthButton />
+    </div>
 
-      <div class="w-full bg-yellow-3 q-mt-md q-px-md q-py-sm rounded-borders">
-        <p class="text-h5 q-mb-xs">{{ t('settingsPage.selectLanguage') }}:</p>
-        <q-select
-          v-model="selectedLanguage"
-          :options="languageOptions"
-          label="Select Language"
-          @update:model-value="changeLanguage"
-        />
-      </div>
-    </q-layout>
-  </q-page>
+    <div class="w-full bg-yellow-3 q-mt-md q-px-md q-py-sm rounded-borders">
+      <p class="text-h5 q-mb-xs">{{ t('settingsPage.selectLanguage') }}:</p>
+      <q-select
+        v-model="selectedLanguage"
+        :options="languageOptions"
+        label="Select Language"
+        @update:model-value="changeLanguage"
+      />
+    </div>
+  </PageLayout>
 </template>
 
 <script setup lang="ts">
@@ -25,6 +23,7 @@ import AuthButton from 'src/components/AuthButton.vue'
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import HeaderText from 'src/components/pageLayoutBuildingBlocks/HeaderText.vue';
+import PageLayout from 'src/components/pageLayoutBuildingBlocks/PageLayout.vue';
 const { t } = useI18n()
 
 const { locale } = useI18n();
