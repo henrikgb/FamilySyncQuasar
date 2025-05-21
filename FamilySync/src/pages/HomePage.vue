@@ -2,27 +2,27 @@
   <PageLayout>
     <div class="home-grid-wrapper">
       <HeaderText :title="t('appTitle')" />
-      <div class="row q-col-gutter-md justify-center home-grid">
+      <div class="row justify-center home-grid">
         <div
-          v-for="(item, index) in homeItems"
-          :key="index"
-          class="col-6"
-        >
-          <q-card
-            class="q-pa-sm q-mb-md cursor-pointer full-width bg-yellow-3 home-card"
-            flat
-            bordered
-            @click="handleRouteChange(item.route)"
+            v-for="(item, index) in homeItems"
+            :key="index"
+            class="col-5 q-ma-xs"
           >
-            <q-img
-              :src="item.img"
-              ratio="1"
-              class="rounded-borders"
-            />
-            <div class="text-center text-subtitle2 q-mt-sm">
-              {{ t(item.label) }}
-            </div>
-          </q-card>
+            <q-card
+                class="q-pa-sm q-mb-md cursor-pointer full-width bg-yellow-3 home-card"
+                flat
+                bordered
+                @click="handleRouteChange(item.route)"
+              >
+                <q-img
+                  :src="item.img"
+                  ratio="1"
+                  class="rounded-borders"
+                />
+                <div class="text-center text-subtitle2 q-mt-sm">
+                  {{ t(item.label) }}
+                </div>
+            </q-card>
         </div>
       </div>
     </div>
