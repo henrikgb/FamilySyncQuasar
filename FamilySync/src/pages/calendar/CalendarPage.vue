@@ -5,7 +5,7 @@
         <p class="text-h2 q-mb-xs">{{ t('calendarPage.title') }}</p>
       </div>
 
-      <!--<div v-if="isAuthenticated">  TEMPORARY -->
+      <div v-if="isAuthenticated">
         <div class="row justify-center item-center q-gutter-x-sm q-gutter-y-sm q-mb-sm no-wrap">
           <q-btn
             @click="setViewCalendarView"
@@ -27,9 +27,8 @@
 
         <EditCalendar v-if="isEditCalendar" />
         <ViewCalendar v-if="isViewCalendar" />
-      <!--</div> TEMPORARY -->
+      </div>
 
-      <!-- TEMPORARY commented out to give someone a chance to view the calendar
       <div v-else class="text-center text-grey q-mt-xl">
         <p>{{ t('auth.pleaseLogin') }}</p>
         <q-btn
@@ -40,7 +39,6 @@
           class="q-mt-md"
         />
       </div>
-      -->
     </q-layout>
   </q-page>
 </template>
@@ -50,12 +48,12 @@ import { ref } from 'vue';
 import EditCalendar from './EditCalendar.vue';
 import ViewCalendar from './ViewCalendar.vue';
 import { useI18n } from 'vue-i18n';
-//import { useAuth } from 'src/composables/useAuth';
+import { useAuth } from 'src/composables/useAuth';
 
 const { t } = useI18n();
-//const { isAuthenticated, loadActiveAccount } = useAuth();
+const { isAuthenticated, loadActiveAccount } = useAuth();
 
-//loadActiveAccount(); // Ensure state is rehydrated if landing here directly
+loadActiveAccount(); // Ensure state is rehydrated if landing here directly
 
 const viewCalendarLabel = t('calendarPage.viewCalendar');
 const editCalendarLabel = t('calendarPage.editCalendar');

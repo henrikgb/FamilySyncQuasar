@@ -2,14 +2,12 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/vue-query'
 import axios from 'axios'
 import { API_BASE } from 'src/constants/api'
 import type { TodoListDTO } from 'src/dto/TodoListDTO'
+import { getAccessToken } from 'src/utils/getAccessToken'
 
 export function useTodoList() {
   return useQuery({
     queryKey: ['todoList'],
     queryFn: async () => {
-      const res = await axios.get(`${API_BASE}/todoList`)
-      /*
-      TEMPRORARY DISABLE AUTHENTICATION
       const accessToken = await getAccessToken()
       if (!accessToken) {
         throw new Error('Not authenticated')
@@ -20,7 +18,6 @@ export function useTodoList() {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      */
 
       return res.data
     },
@@ -33,8 +30,6 @@ export function useUpdateTodoList() {
   return useMutation({
     mutationFn: async (updatedTodos: TodoListDTO) => {
       await axios.post(`${API_BASE}/todoList`, updatedTodos)
-      /*
-      TEMPRORARY DISABLE AUTHENTICATION
       const accessToken = await getAccessToken();
       if (!accessToken) {
         throw new Error('Not authenticated')
@@ -46,7 +41,6 @@ export function useUpdateTodoList() {
           'Content-Type': 'application/json',
         },
       });
-      */
     },
     onSuccess: () => {
       // This tells all components using useUpdateTodoList() to refetch the data

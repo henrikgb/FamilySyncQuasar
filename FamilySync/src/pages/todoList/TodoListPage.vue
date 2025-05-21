@@ -5,13 +5,11 @@
         <p class="text-h2 q-mb-xs">{{ t('todoListPage.title') }}</p>
       </div>
 
-      <!--<div v-if="isAuthenticated" class="q-gutter-lg"> -- TEMPORARY -->
-      <div class="q-gutter-lg">
+      <div v-if="isAuthenticated" class="q-gutter-lg">
         <AddTodoListItem />
         <ViewAndManageTodoList />
       </div>
 
-      <!-- TEMPORARY commented out to give someone a chance to view the todo list
       <div v-else class="text-center text-grey q-mt-xl">
         <p>{{ t('auth.pleaseLogin') }}</p>
         <q-btn
@@ -22,7 +20,6 @@
           class="q-mt-md"
         />
       </div>
-      -->
     </q-layout>
   </q-page>
 </template>
@@ -31,10 +28,10 @@
 import AddTodoListItem from './AddTodoListItem.vue';
 import ViewAndManageTodoList from './ViewAndManageTodoList.vue';
 import { useI18n } from 'vue-i18n';
-//import { useAuth } from 'src/composables/useAuth';
+import { useAuth } from 'src/composables/useAuth';
 
 const { t } = useI18n();
-// const { isAuthenticated, loadActiveAccount } = useAuth();
+const { isAuthenticated, loadActiveAccount } = useAuth();
 
-//loadActiveAccount();
+loadActiveAccount(); // Ensure login state is rehydrated if landing directly
 </script>
