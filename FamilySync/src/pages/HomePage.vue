@@ -53,7 +53,7 @@ const homeItems = [
 <style scoped>
 .home-grid-wrapper {
   width: 100%;
-  max-width: 600px;
+  max-width: 520px;
   min-width: 350px;
   margin: 0 auto;
   box-sizing: border-box;
