@@ -2,8 +2,8 @@
   <PageLayout>
     <HeaderText :title="t('shoppingListPage.title')" />
 
-    <div v-if="isAuthenticated" class="q-gutter-lg">
-      <AddShoppingItem />
+    <div v-if="isAuthenticated" class="col">
+      <AddShoppingItem class="q-mb-lg"/>
       <ViewAndManageShoppingList />
     </div>
 

@@ -1,5 +1,5 @@
 <template>
-  <q-page class="column items-center q-pt-sm">
+  <q-page class="column items-center">
     <q-layout class="q-px-lg q-py-lg">
       <slot />
     </q-layout>

@@ -2,8 +2,8 @@
   <PageLayout>
     <HeaderText :title="t('todoListPage.title')" />
 
-    <div v-if="isAuthenticated" class="q-gutter-lg">
-      <AddTodoListItem />
+    <div v-if="isAuthenticated" class="col">
+      <AddTodoListItem class="q-mb-lg"/>
       <ViewAndManageTodoList />
     </div>
 
