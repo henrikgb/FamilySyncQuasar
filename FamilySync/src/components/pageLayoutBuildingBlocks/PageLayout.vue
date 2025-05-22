@@ -1,6 +1,6 @@
 <template>
   <q-page class="column items-center">
-    <q-layout class="q-px-sm q-py-lg">
+    <q-layout class="column q-px-sm" style="gap: 16px">
       <slot />
     </q-layout>
   </q-page>

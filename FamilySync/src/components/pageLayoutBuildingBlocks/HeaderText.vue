@@ -1,6 +1,6 @@
 <template>
-  <div class="text-center q-mb-lg">
-    <p class="text-h2">{{ title }}</p>
+  <div class="text-center">
+    <p class="text-h2 q-mb-none">{{ title }}</p>
   </div>
 </template>
 

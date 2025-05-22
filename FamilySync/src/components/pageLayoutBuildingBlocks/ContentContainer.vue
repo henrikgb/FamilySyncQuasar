@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-yellow-3 q-mt-md q-px-md q-pa-md rounded-borders">
+  <q-card class="bg-yellow-3 q-pa-md rounded-borders">
     <slot />
-  </div>
+  </q-card>
 </template>
