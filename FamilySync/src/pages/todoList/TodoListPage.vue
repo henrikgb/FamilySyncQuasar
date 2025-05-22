@@ -1,15 +1,9 @@
 <template>
   <PageLayout>
     <HeaderText :title="t('todoListPage.title')" />
-
-    <div v-if="isAuthenticated" class="col">
-      <AddTodoListItem class="q-mb-lg"/>
-      <ViewAndManageTodoList />
-    </div>
-
-    <div v-else>
-      <DataProtectedGoToLogin />
-    </div>
+    <AddTodoListItem v-if="isAuthenticated" class="q-mb-lg"/>
+    <ViewAndManageTodoList v-if="isAuthenticated" />
+    <DataProtectedGoToLogin v-else/>
   </PageLayout>
 </template>
 
