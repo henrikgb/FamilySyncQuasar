@@ -1,15 +1,9 @@
 <template>
   <PageLayout>
     <HeaderText :title="t('shoppingListPage.title')" />
-
-    <div v-if="isAuthenticated" class="col">
-      <AddShoppingItem class="q-mb-lg"/>
-      <ViewAndManageShoppingList />
-    </div>
-
-    <div v-else>
-      <DataProtectedGoToLogin />
-    </div>
+    <AddShoppingItem v-if="isAuthenticated" class="q-mb-lg"/>
+    <ViewAndManageShoppingList v-if="isAuthenticated"/>
+    <DataProtectedGoToLogin v-else/>
   </PageLayout>
 </template>
 
