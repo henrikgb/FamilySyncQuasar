@@ -1,59 +1,17 @@
 <template>
-  <div class="bg-yellow-3 q-pa-md rounded-borders w-100">
-    <div v-if="isLoading" class="text-center q-mt-lg">
-      <q-spinner color="teal" size="50px" />
-      <div class="w-full">
-        <text-h4>Loading</text-h4>
-      </div>
-    </div>
-    <div v-else>
-      <h6 class="q-my-sm">{{ t('todoListPage.todoList') }}:</h6>
-      <q-card
-        v-for="(tasks, category) in groupedTasks"
-        :key="category"
-        class="q-mb-md bg-yellow-2"
-      >
-      <q-expansion-item
-        :label="`${category.toUpperCase()} -
-        📝 ${tasks.length} |
-        ✅ ${tasks.filter(task => task.isCompleted).length} |
-        ⏳ ${tasks.filter(task => !task.isCompleted).length}`"
-        expand-separator
-      >
-          <q-card-section
-            v-for="task in tasks"
-            :key="task.task + task.category"
-            class="row items-center q-pa-sm"
-          >
-            <!-- Item info & toggle -->
-            <div class="col-9 row items-center">
-              <q-toggle
-                v-model="task.isCompleted"
-                @update:model-value="val => toggleCompleted(task, val)"
-                dense
-                size="sm"
-                color="green"
-                :label="`${task.task}`"
-                :class="{ 'text-strike': task.isCompleted }"
-              />
-            </div>
-
-            <!-- Delete button -->
-            <div class="col-3 text-right">
-              <q-btn
-                flat
-                round
-                icon="delete"
-                color="negative"
-                @click="deleteTask(task)"
-              />
-            </div>
-          </q-card-section>
-
-        </q-expansion-item>
-      </q-card>
-    </div>
-  </div>
+  <ContentContainer>
+    <LoadingAnimation v-if="isLoading" />
+    <GroupedChecklists
+      v-else
+      :title="t('todoListPage.todoList')"
+      icon="📝"
+      :groupedItems="groupedTasks"
+      :keyFn="(task: TodoListItemDTO) => task.task + task.category"
+      :labelFn="(task: TodoListItemDTO) => `${task.task}`"
+      :toggleCompleted="toggleCompleted"
+      :deleteFn="deleteTask"
+    />
+  </ContentContainer>
 </template>
 
 <script setup lang="ts">
@@ -62,6 +20,9 @@ import { useTodoList, useUpdateTodoList } from 'src/queries/useTodoList'
 import type { TodoListItemDTO } from 'src/dto/TodoListDTO'
 import { Notify } from 'quasar'
 import { useI18n } from 'vue-i18n'
+import ContentContainer from 'src/components/pageLayoutBuildingBlocks/ContentContainer.vue'
+import LoadingAnimation from 'src/components/pageLayoutBuildingBlocks/LoadingAnimation.vue'
+import GroupedChecklists from 'src/components/pageLayoutBuildingBlocks/GroupedChecklists.vue'
 
 const { t } = useI18n()
 
@@ -131,10 +92,3 @@ async function deleteTask(taskToDelete: TodoListItemDTO) {
   }
 }
 </script>
-
-<style scoped>
-.text-strike {
-  text-decoration: line-through;
-  color: #888;
-}
-</style>

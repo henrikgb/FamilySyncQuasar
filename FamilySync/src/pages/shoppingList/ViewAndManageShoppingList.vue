@@ -1,59 +1,17 @@
 <template>
-  <div class="bg-yellow-3 q-pa-md rounded-borders w-100">
-    <div v-if="isLoading" class="text-center q-mt-lg">
-      <q-spinner color="teal" size="50px" />
-      <div class="w-full">
-        <text-h4>Loading</text-h4>
-      </div>
-    </div>
-    <div v-else>
-      <h6 class="q-my-sm">{{ t('shoppingListPage.shoppingList') }}:</h6>
-      <q-card
-        v-for="(items, category) in groupedItems"
-        :key="category"
-        class="q-mb-md bg-yellow-2"
-      >
-      <q-expansion-item
-        :label="`${category.toUpperCase()} -
-        🛒 ${items.length} |
-        ✅ ${items.filter(item => item.isCompleted).length} |
-        ⏳ ${items.filter(item => !item.isCompleted).length}`"
-        expand-separator
-      >
-          <q-card-section
-            v-for="item in items"
-            :key="item.name + item.category"
-            class="row items-center q-pa-sm"
-          >
-            <!-- Item info & toggle -->
-            <div class="col-9 row items-center">
-              <q-toggle
-                v-model="item.isCompleted"
-                @update:model-value="val => toggleCompleted(item, val)"
-                dense
-                size="sm"
-                color="green"
-                :label="`${item.name} (${item.quantity} stk)`"
-                :class="{ 'text-strike': item.isCompleted }"
-              />
-            </div>
-
-            <!-- Delete button -->
-            <div class="col-3 text-right">
-              <q-btn
-                flat
-                round
-                icon="delete"
-                color="negative"
-                @click="deleteItem(item)"
-              />
-            </div>
-          </q-card-section>
-
-        </q-expansion-item>
-      </q-card>
-    </div>
-  </div>
+  <ContentContainer>
+    <LoadingAnimation v-if="isLoading" />
+    <GroupedChecklists
+      v-else
+      :title="t('shoppingListPage.shoppingList')"
+      icon="🛒"
+      :groupedItems="groupedItems"
+      :keyFn="(item: ShoppingListItemDTO) => item.name + item.category"
+      :labelFn="(item: ShoppingListItemDTO) => `${item.name} (${item.quantity} stk)`"
+      :toggleCompleted="toggleCompleted"
+      :deleteFn="deleteItem"
+    />
+  </ContentContainer>
 </template>
 
 <script setup lang="ts">
@@ -62,6 +20,9 @@ import { useI18n } from 'vue-i18n'
 import { useShoppingList, useUpdateShoppingList } from 'src/queries/useShoppingList'
 import type { ShoppingListItemDTO } from 'src/dto/ShoppingListDTO'
 import { Notify } from 'quasar'
+import ContentContainer from 'src/components/pageLayoutBuildingBlocks/ContentContainer.vue'
+import LoadingAnimation from 'src/components/pageLayoutBuildingBlocks/LoadingAnimation.vue'
+import GroupedChecklists from 'src/components/pageLayoutBuildingBlocks/GroupedChecklists.vue'
 const { data: shoppingList, isLoading } = useShoppingList()
 const { t } = useI18n()
 const updateShoppingList = useUpdateShoppingList()
@@ -130,10 +91,3 @@ async function deleteItem(itemToDelete: ShoppingListItemDTO) {
   }
 }
 </script>
-
-<style scoped>
-.text-strike {
-  text-decoration: line-through;
-  color: #888;
-}
-</style>
