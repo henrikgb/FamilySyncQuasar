@@ -2,11 +2,11 @@
   <PageLayout>
     <HeaderText :title="t('settingsPage.title')" />
 
-    <div class="w-full bg-yellow-3 q-px-md q-py-md rounded-borders">
+    <ContentContainer>
       <AuthButton />
-    </div>
+    </ContentContainer>
 
-    <div class="w-full bg-yellow-3 q-mt-md q-px-md q-py-sm rounded-borders">
+    <ContentContainer>
       <p class="text-h5 q-mb-xs">{{ t('settingsPage.selectLanguage') }}:</p>
       <q-select
         v-model="selectedLanguage"
@@ -14,7 +14,7 @@
         label="Select Language"
         @update:model-value="changeLanguage"
       />
-    </div>
+    </ContentContainer>
   </PageLayout>
 </template>
 
@@ -24,6 +24,7 @@ import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import HeaderText from 'src/components/pageLayoutBuildingBlocks/HeaderText.vue';
 import PageLayout from 'src/components/pageLayoutBuildingBlocks/PageLayout.vue';
+import ContentContainer from 'src/components/pageLayoutBuildingBlocks/ContentContainer.vue';
 const { t } = useI18n()
 
 const { locale } = useI18n();
