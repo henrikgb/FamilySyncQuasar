@@ -52,6 +52,9 @@ const homeItems = [
 
 <style scoped>
 .home-grid-wrapper {
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 600px;
   min-width: 350px;
