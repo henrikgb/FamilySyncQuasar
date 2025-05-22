@@ -2,7 +2,7 @@
   <PageLayout>
     <HeaderText :title="t('calendarPage.title')" />
 
-    <div v-if="isAuthenticated">
+    <div v-if="isAuthenticated" class="column" style="gap: 16px">
       <ViewAndEditButtons
         @setViewCalendarView="val => isViewCalendar = val"
         @setEditCalendarView="val => isEditCalendar = val"
@@ -11,9 +11,7 @@
       <ViewCalendar v-if="isViewCalendar" />
     </div>
 
-    <div v-else>
-      <DataProtectedGoToLogin />
-    </div>
+    <DataProtectedGoToLogin v-else />
   </PageLayout>
 </template>
 

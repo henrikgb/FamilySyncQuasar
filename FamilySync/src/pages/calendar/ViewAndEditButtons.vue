@@ -1,8 +1,8 @@
 <template>
-  <div class="row justify-center item-center q-gutter-x-sm q-gutter-y-sm q-mb-sm no-wrap">
+  <div class="row justify-center item-center no-wrap">
     <q-btn
       @click="setViewCalendarView"
-      class="glossy"
+      class="glossy q-mx-sm"
       :color="isViewCalendar ? 'white' : 'teal'"
       :text-color="isViewCalendar ? 'teal' : 'white'"
       icon-right="event_available"
@@ -10,7 +10,7 @@
     />
     <q-btn
       @click="setEditCalendarView"
-      class="glossy"
+      class="glossy q-mr-sm"
       :color="isEditCalendar ? 'white' : 'teal'"
       :text-color="isEditCalendar ? 'teal' : 'white'"
       icon="edit_calendar"
