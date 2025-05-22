@@ -1,39 +1,32 @@
 <template>
-  <div class="bg-yellow-3 q-pa-md rounded-borders w-100">
+  <ContainerContent>
     <h6 class="q-my-sm">{{ t('todoListPage.addTodoListItem') }}</h6>
 
-    <!-- Task input (required) -->
     <q-input
       v-model="task"
       :label="describeTask"
       filled
-      class="q-mb-sm"
       :rules="[val => !!val || taskDescriptionRequired]"
     />
 
-    <!-- Category select (optional, default fallback handled in script) -->
     <q-select
       v-model="category"
       :options="categories"
       :label="taskCategory"
       filled
-      class="q-mb-sm"
       emit-value
       map-options
       use-input
       clearable
     />
 
-    <!-- Add button -->
-    <div class="row justify-end">
-      <q-btn
-        :label="addTask"
-        color="teal"
-        class="glossy"
-        @click="handleAddTask"
-      />
-    </div>
-  </div>
+    <q-btn
+      :label="addTask"
+      color="teal"
+      class="glossy q-mt-md"
+      @click="handleAddTask"
+    />
+  </ContainerContent>
 </template>
 
 <script setup lang="ts">
@@ -42,19 +35,17 @@ import { useTodoList, useUpdateTodoList } from 'src/queries/useTodoList'
 import type { TodoListItemDTO } from 'src/dto/TodoListDTO'
 import { Notify } from 'quasar'
 import { useI18n } from 'vue-i18n'
+import ContainerContent from 'src/components/pageLayoutBuildingBlocks/ContentContainer.vue'
 const { t } = useI18n()
 
-// Text on page
 const describeTask = computed(() => t('todoListPage.describeYourTask'))
 const taskDescriptionRequired = computed(() => t('todoListPage.taskDescriptionIsRequired'))
 const taskCategory = computed(() => t('todoListPage.category'))
 const addTask = computed(() => t('todoListPage.addTask'))
 
-// Form state
 const task = ref('')
 const category = ref('')
 
-// Example category options
 const categories = [
   'Oppussing',
   'Husvask',
@@ -62,11 +53,9 @@ const categories = [
   'Diverse',
 ]
 
-// Data fetch and mutation
 const { data: todoList } = useTodoList()
 const updateTodoList = useUpdateTodoList()
 
-// Add new item to list and update API
 const handleAddTask = async () => {
   if (!task.value) {
     Notify.create({
