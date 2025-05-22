@@ -19,7 +19,6 @@
           transition-prev="jump-up"
           transition-next="jump-up"
           class="bg-yellow-3 rounded-borders"
-          style="width: 360px;"
         >
           <q-tab-panel
             v-for="(descriptions, panelDate) in groupedPanels"
