@@ -1,7 +1,7 @@
 <template>
-  <q-layout class="q-py-lg">
+  <q-layout class="column" style="gap: 16px">
     <!-- Form for adding new schedule item -->
-    <div class="w-100 bg-yellow-3 rounded-borders q-pa-md">
+    <ContentContainer>
       <h6 class="q-my-sm">{{ t('calendarPage.enterDate') }}:</h6>
       <!-- Date input with popup calendar -->
       <q-input
@@ -43,18 +43,12 @@
           @click="saveScheduleItem"
         />
       </div>
-    </div>
+    </ContentContainer>
 
-    <!-- Show loading spinner while data is being fetched -->
-    <div v-if="isLoading" class="text-center q-mt-lg">
-      <q-spinner color="teal" size="50px" />
-      <div class="w-full">
-        <text-h4>Loading</text-h4>
-      </div>
-    </div>
+    <LoadingAnimation v-if="isLoading" />
 
     <!-- Show saved calendar items grouped by month -->
-    <div v-else class="q-mt-lg bg-yellow-3 rounded-borders q-pa-md">
+    <ContentContainer v-else>
       <h6 class="q-my-sm">{{ t('calendarPage.scheduledEvents') }}:</h6>
       <q-list>
         <!-- Expansion group for each month -->
@@ -88,7 +82,8 @@
           </q-item>
         </q-expansion-item>
       </q-list>
-    </div>
+    </ContentContainer>
+
   </q-layout>
 </template>
 
@@ -96,6 +91,8 @@
 import { ref, computed } from 'vue'
 import { useCalendarSchedule, useUpdateCalendarSchedule } from 'src/queries/useCalendarSchedule'
 import type { CalendarScheduleItemDTO } from 'src/dto/CalendarScheduleDTO'
+import LoadingAnimation from 'src/components/pageLayoutBuildingBlocks/LoadingAnimation.vue'
+import ContentContainer from 'src/components/pageLayoutBuildingBlocks/ContentContainer.vue'
 import { Notify } from 'quasar'
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n()
