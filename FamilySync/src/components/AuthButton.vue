@@ -8,7 +8,7 @@
       @click="login"
     />
     <div v-else>
-      <div>{{ t('settingsPage.welcome') }}, {{ name }}</div>
+      <p class="q-mb-none">{{ t('settingsPage.welcome') }}, {{ name }}</p>
       <q-btn
         :label="t('settingsPage.logout')"
         color="negative"
