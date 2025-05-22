@@ -1,9 +1,8 @@
 <template>
   <q-layout class="column" style="gap: 16px">
-    <!-- Form for adding new schedule item -->
     <ContentContainer>
       <h6 class="q-my-sm">{{ t('calendarPage.enterDate') }}:</h6>
-      <!-- Date input with popup calendar -->
+
       <q-input
         filled
         v-model="date"
@@ -11,7 +10,6 @@
         :rules="['date']"
         class="q-input-date"
       >
-        <!-- Calendar popup -->
         <template v-slot:append>
           <q-icon name="event" class="cursor-pointer">
             <q-popup-proxy cover transition-show="scale" transition-hide="scale">
@@ -25,8 +23,7 @@
         </template>
       </q-input>
 
-      <h6 class="q-my-sm">{{ t('calendarPage.enterDescription') }}:</h6>
-      <!-- Description textarea input -->
+      <h6 class="q-mb-sm q-mt-none">{{ t('calendarPage.enterDescription') }}:</h6>
       <q-input
         v-model="description"
         filled
@@ -34,31 +31,25 @@
         class="q-input-textarea"
       />
 
-      <!-- Save button to add a new item -->
-      <div class="row justify-end">
-        <q-btn
-          class="q-mt-md"
-          label="Save"
-          color="teal"
-          @click="saveScheduleItem"
-        />
-      </div>
+      <q-btn
+        class="glossy q-mt-md"
+        label="Save"
+        color="teal"
+        @click="saveScheduleItem"
+      />
     </ContentContainer>
 
     <LoadingAnimation v-if="isLoading" />
 
-    <!-- Show saved calendar items grouped by month -->
     <ContentContainer v-else>
       <h6 class="q-my-sm">{{ t('calendarPage.scheduledEvents') }}:</h6>
       <q-list>
-        <!-- Expansion group for each month -->
         <q-expansion-item
           v-for="(scheduleItems, key) in groupedScheduleItems"
           :key="key"
           :label="key"
           class="black-border bg-lime-3"
         >
-          <!-- Display each schedule item under its month -->
           <q-item
             v-for="(scheduleItem, index) in scheduleItems"
             :key="index"
@@ -70,7 +61,6 @@
                 <strong>Description:</strong> {{ scheduleItem.description }}
               </div>
             </q-item-section>
-            <!-- Delete button for individual item -->
             <q-item-section side>
               <q-btn
                 flat
