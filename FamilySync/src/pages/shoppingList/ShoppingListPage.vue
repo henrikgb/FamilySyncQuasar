@@ -1,7 +1,7 @@
 <template>
   <PageLayout>
     <HeaderText :title="t('shoppingListPage.title')" />
-    <AddShoppingItem v-if="isAuthenticated" class="q-mb-lg"/>
+    <AddShoppingItem v-if="isAuthenticated" />
     <ViewAndManageShoppingList v-if="isAuthenticated"/>
     <DataProtectedGoToLogin v-else/>
   </PageLayout>
