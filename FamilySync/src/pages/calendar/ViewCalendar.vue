@@ -12,7 +12,7 @@
         />
       </div>
 
-      <ContentContainer>
+      <ContentContainer v-if="hasVisibleDescriptions">
         <q-tab-panels
           v-model="date"
           animated
@@ -87,5 +87,9 @@ const groupedPanels = computed(() => {
     acc[item.date]?.push(item.description)
     return acc
   }, {} as Record<string, string[]>)
+})
+
+const hasVisibleDescriptions = computed(() => {
+  return groupedPanels.value[date.value]?.length > 0
 })
 </script>
