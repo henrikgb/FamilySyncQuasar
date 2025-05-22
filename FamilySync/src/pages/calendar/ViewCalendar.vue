@@ -1,16 +1,8 @@
 <template>
   <q-layout class="q-py-lg">
-    <!-- Show a loading spinner while data is being fetched -->
-    <div v-if="isLoading" class="text-center q-mt-lg">
-      <q-spinner color="teal" size="50px" />
-      <div class="w-full">
-        <text-h4>Loading</text-h4>
-      </div>
-    </div>
+    <LoadingAnimation v-if="isLoading" />
 
-    <!-- Display calendar and grouped panels when data is loaded -->
     <div v-else class="col item-center">
-      <!-- Calendar date picker -->
       <div class="row justify-center q-mb-lg">
         <q-date
           v-model="date"
@@ -20,8 +12,7 @@
         />
       </div>
 
-      <!-- Tab panels for each date -->
-      <div class="row justify-center">
+      <ContentContainer>
         <q-tab-panels
           v-model="date"
           animated
@@ -30,7 +21,6 @@
           class="bg-yellow-3 rounded-borders"
           style="width: 360px;"
         >
-          <!-- Dynamically generate a tab panel for each date -->
           <q-tab-panel
             v-for="(descriptions, panelDate) in groupedPanels"
             :key="panelDate"
@@ -42,8 +32,8 @@
             </div>
           </q-tab-panel>
         </q-tab-panels>
+      </ContentContainer>
       </div>
-    </div>
   </q-layout>
 </template>
 
@@ -51,6 +41,8 @@
 import { ref, computed } from 'vue'
 import { useCalendarSchedule } from 'src/queries/useCalendarSchedule'
 import type { CalendarScheduleItemDTO } from 'src/dto/CalendarScheduleDTO'
+import LoadingAnimation from 'src/components/pageLayoutBuildingBlocks/LoadingAnimation.vue'
+import ContentContainer from 'src/components/pageLayoutBuildingBlocks/ContentContainer.vue'
 
 /**
  * Fetch calendar schedule data from the API.
