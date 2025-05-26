@@ -1,16 +1,16 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/vue-query'
-import axios from 'axios'
-import { API_BASE } from 'src/constants/api'
-import type {ShoppingListItemDTO } from 'src/dto/ShoppingListDTO'
-import { getAccessToken } from 'src/utils/getAccessToken'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/vue-query';
+import axios from 'axios';
+import { API_BASE } from 'src/constants/api';
+import type { ShoppingListItemDTO } from 'src/dto/ShoppingListDTO';
+import { getAccessToken } from 'src/utils/getAccessToken';
 
 export function useShoppingList() {
   return useQuery({
     queryKey: ['shoppingList'],
     queryFn: async () => {
       const accessToken = await getAccessToken();
-      if(!accessToken) {
-        throw new Error('Not authenticated')
+      if (!accessToken) {
+        throw new Error('Not authenticated');
       }
 
       const res = await axios.get(`${API_BASE}/ShoppingList`, {
@@ -19,20 +19,19 @@ export function useShoppingList() {
         },
       });
 
-      return res.data
+      return res.data;
     },
-  })
+  });
 }
 
 export function useUpdateShoppingList() {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (updatedShoppingList: ShoppingListItemDTO[]) => {
-      await axios.post(`${API_BASE}/ShoppingList`, updatedShoppingList)
       const accessToken = await getAccessToken();
       if (!accessToken) {
-        throw new Error('Not authenticated')
+        throw new Error('Not authenticated');
       }
 
       await axios.post(`${API_BASE}/ShoppingList`, updatedShoppingList, {
@@ -43,7 +42,7 @@ export function useUpdateShoppingList() {
       });
     },
     onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: ['shoppingList'] })
+      void queryClient.invalidateQueries({ queryKey: ['shoppingList'] });
     },
-  })
+  });
 }

@@ -29,10 +29,9 @@ export function useUpdateTodoList() {
 
   return useMutation({
     mutationFn: async (updatedTodos: TodoListItemDTO[]) => {
-      await axios.post(`${API_BASE}/TodoList`, updatedTodos)
       const accessToken = await getAccessToken();
       if (!accessToken) {
-        throw new Error('Not authenticated')
+        throw new Error('Not authenticated');
       }
 
       await axios.post(`${API_BASE}/TodoList`, updatedTodos, {
@@ -43,8 +42,7 @@ export function useUpdateTodoList() {
       });
     },
     onSuccess: () => {
-      // This tells all components using useUpdateTodoList() to refetch the data
-      void queryClient.invalidateQueries({ queryKey: ['todoList'] })
+      void queryClient.invalidateQueries({ queryKey: ['todoList'] });
     },
-  })
+  });
 }
