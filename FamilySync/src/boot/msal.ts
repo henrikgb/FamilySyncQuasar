@@ -1,4 +1,3 @@
-// src/boot/msal.ts
 import { boot } from 'quasar/wrappers';
 import { PublicClientApplication } from '@azure/msal-browser';
 import type { Configuration } from '@azure/msal-browser';
