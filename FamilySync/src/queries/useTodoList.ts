@@ -29,7 +29,7 @@ export function useUpdateTodoList() {
 
   return useMutation({
     mutationFn: async (updatedTodos: TodoListItemDTO[]) => {
-      await axios.post(`${API_BASE}/todoList`, updatedTodos)
+      await axios.post(`${API_BASE}/TodoList`, updatedTodos)
       const accessToken = await getAccessToken();
       if (!accessToken) {
         throw new Error('Not authenticated')
