@@ -24,6 +24,7 @@ import { getCurrentInstance, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import type { AccountInfo } from '@azure/msal-browser';
 import { useI18n } from 'vue-i18n';
+import { loginRequest } from 'src/boot/msal';
 
 const { t } = useI18n();
 
@@ -50,7 +51,7 @@ onMounted(async () => {
 const login = () => {
   // Dynamically set the post-login redirect to the current route
   sessionStorage.setItem('postLoginRedirect', router.currentRoute.value.fullPath);
-  void msal.loginRedirect();
+  void msal.loginRedirect(loginRequest);
 };
 
 const logout = () => {

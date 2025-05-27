@@ -9,11 +9,16 @@ const msalConfig: Configuration = {
     redirectUri: import.meta.env.DEV
       ? import.meta.env.VITE_AZURE_REDIRECT_URI_DEV
       : import.meta.env.VITE_AZURE_REDIRECT_URI_PROD,
+    knownAuthorities: [],
   },
   cache: {
     cacheLocation: 'localStorage',
     storeAuthStateInCookie: false,
   },
+};
+
+export const loginRequest = {
+  scopes: [`api://${import.meta.env.VITE_AZURE_CLIENT_ID}/access_as_user`]
 };
 
 export const msalInstance = new PublicClientApplication(msalConfig);
