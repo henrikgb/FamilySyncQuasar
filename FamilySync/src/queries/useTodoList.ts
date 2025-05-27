@@ -13,6 +13,9 @@ export function useTodoList() {
         throw new Error('Not authenticated')
       }
 
+      console.log("API_BASE", API_BASE);
+      console.log("accessToken", accessToken);
+
       const res = await axios.get(`${API_BASE}/TodoList`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,

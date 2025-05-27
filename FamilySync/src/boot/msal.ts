@@ -16,6 +16,8 @@ const msalConfig: Configuration = {
   },
 };
 
+console.log('MSAL Configuration:', msalConfig);
+
 export const msalInstance = new PublicClientApplication(msalConfig);
 
 export default boot(async ({ app, router }) => {
