@@ -38,6 +38,7 @@ jobs:
           VITE_AZURE_TENANT_ID: ${{ secrets.VITE_AZURE_TENANT_ID }}
           VITE_AZURE_REDIRECT_URI_PROD: ${{ secrets.VITE_AZURE_REDIRECT_URI_PROD }}
           VITE_AZURE_REDIRECT_URI_DEV: ${{ secrets.VITE_AZURE_REDIRECT_URI_DEV }}
+          VITE_API_SCOPE: ${{ secrets.VITE_API_SCOPE }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
