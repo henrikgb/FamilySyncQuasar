@@ -15,6 +15,13 @@ export async function getAccessToken(): Promise<string | null> {
     });
 
     console.log('response.scopes', response.scopes);
+    console.log('Access token:', response.accessToken);
+    const payloadPart = response.accessToken.split('.')[1];
+    if (!payloadPart) {
+      throw new Error('Invalid access token format');
+    }
+    const tokenPayload = JSON.parse(atob(payloadPart));
+    console.log('Decoded token payload:', tokenPayload);
 
     return response.accessToken;
   } catch (error) {
