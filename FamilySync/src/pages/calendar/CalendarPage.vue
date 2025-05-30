@@ -12,7 +12,7 @@
       <UserDoesNotHaveAccessToData  v-if="isAuthenticated && !isCalendarUser" />
     </div>
 
-    <DataProtectedGoToLogin v-else />
+    <DataProtectedGoToLogin v-if="!isAuthenticated" />
   </PageLayout>
 </template>
 

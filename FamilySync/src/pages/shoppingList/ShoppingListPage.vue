@@ -4,7 +4,7 @@
     <AddShoppingItem v-if="isAuthenticated && isShoppingUserType" />
     <ViewAndManageShoppingList v-if="isAuthenticated && isShoppingUserType"/>
     <UserDoesNotHaveAccessToData  v-if="isAuthenticated && !isShoppingUserType"/>
-    <DataProtectedGoToLogin v-else />
+    <DataProtectedGoToLogin v-if="!isAuthenticated" />
   </PageLayout>
 </template>
 

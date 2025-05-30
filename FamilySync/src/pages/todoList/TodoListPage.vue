@@ -4,7 +4,7 @@
     <AddTodoListItem v-if="isAuthenticated && isTodoUserType"/>
     <ViewAndManageTodoList v-if="isAuthenticated && isTodoUserType" />
     <UserDoesNotHaveAccessToData v-if="isAuthenticated && !isTodoUserType" />
-    <DataProtectedGoToLogin v-else />
+    <DataProtectedGoToLogin v-if="!isAuthenticated" />
   </PageLayout>
 </template>
 
