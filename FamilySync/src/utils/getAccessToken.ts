@@ -14,7 +14,6 @@ export async function getAccessToken(): Promise<string | null> {
       scopes: [`api://${import.meta.env.VITE_AZURE_CLIENT_ID}/access_as_user`]
     });
 
-    console.log('Access token:', response.accessToken);
     return response.accessToken;
   } catch (error) {
     console.error('Failed to acquire access token silently', error);
