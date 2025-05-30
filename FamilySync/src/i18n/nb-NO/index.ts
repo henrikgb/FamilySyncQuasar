@@ -44,6 +44,7 @@ export default {
     goToLogin: 'Gå til innlogging',
   },
   hello: 'Hei',
+  youHaveTheFollowingRoles: 'Du har fått tildelt følgende brukerroller',
   userDoesNotHaveAccessToData: 'Beklager! Du har dessverre ikke tilgang til de relevante dataene på denne siden.',
   total: 'Totalt',
   remaining: 'Gjenstående',

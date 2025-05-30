@@ -44,6 +44,7 @@ export default {
     goToLogin: 'Go to login',
   },
   hello: 'Hello',
+  youHaveTheFollowingRoles: 'You have been granted the following user roles',
   userDoesNotHaveAccessToData: 'Sorry! Unfortunately, you do not have access to the relevant data on this page.',
   total: 'Total',
   remaining: 'Remaining',
