@@ -43,6 +43,8 @@ export default {
     pleaseLogin: 'Vennligst logg inn for å få tilgang til appen.',
     goToLogin: 'Gå til innlogging',
   },
+  hello: 'Hei',
+  userDoesNotHaveAccessToData: 'Beklager! Du har dessverre ikke tilgang til de relevante dataene på denne siden.',
   total: 'Totalt',
   remaining: 'Gjenstående',
   completed: 'Fullført',

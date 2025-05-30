@@ -3,12 +3,13 @@
     <HeaderText :title="t('calendarPage.title')" />
 
     <div v-if="isAuthenticated" class="column" style="gap: 16px">
-      <ViewAndEditButtons
+      <ViewAndEditButtons v-if="isCalendarUser"
         @setViewCalendarView="val => isViewCalendar = val"
         @setEditCalendarView="val => isEditCalendar = val"
       />
-      <EditCalendar v-if="isEditCalendar" />
-      <ViewCalendar v-if="isViewCalendar" />
+      <EditCalendar v-if="isEditCalendar && isCalendarUser" />
+      <ViewCalendar v-if="isViewCalendar && isCalendarUser" />
+      <UserDoesNotHaveAccessToData  v-if="isAuthenticated && !isCalendarUser" />
     </div>
 
     <DataProtectedGoToLogin v-else />
@@ -25,11 +26,14 @@ import DataProtectedGoToLogin from 'src/components/pageLayoutBuildingBlocks/Data
 import HeaderText from 'src/components/pageLayoutBuildingBlocks/HeaderText.vue';
 import ViewAndEditButtons from './ViewAndEditButtons.vue';
 import PageLayout from 'src/components/pageLayoutBuildingBlocks/PageLayout.vue';
+import UserDoesNotHaveAccessToData from 'src/components/pageLayoutBuildingBlocks/UserDoesNotHaveAccessToData.vue';
+import { isCalendarUserType } from 'src/utils/checkUserType';
 
 const { t } = useI18n();
 const { isAuthenticated, loadActiveAccount } = useAuth();
 const isViewCalendar = ref(true);
 const isEditCalendar = ref(false);
+const isCalendarUser = isCalendarUserType;
 
 loadActiveAccount(); // Ensure state is rehydrated if landing here directly
 </script>

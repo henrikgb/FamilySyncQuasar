@@ -43,6 +43,8 @@ export default {
     pleaseLogin: 'Please login to access the app.',
     goToLogin: 'Go to login',
   },
+  hello: 'Hello',
+  userDoesNotHaveAccessToData: 'Sorry! Unfortunately, you do not have access to the relevant data on this page.',
   total: 'Total',
   remaining: 'Remaining',
   completed: 'Completed',
