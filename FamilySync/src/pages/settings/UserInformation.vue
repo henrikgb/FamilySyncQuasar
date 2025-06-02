@@ -5,7 +5,7 @@
   </div>
   <div v-else-if="!isLoggedIn">
     <p class="text-h5 q-mb-xs">{{ t('settingsPage.welcome') }}:</p>
-    <p class="q-mb-md">{{ t('settingsPage.pleaseLogin') }}!</p>
+    <p class="q-mb-md">{{ t('settingsPage.pleaseLogin') }}</p>
   </div>
 </template>
 
