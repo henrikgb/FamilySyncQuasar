@@ -37,7 +37,24 @@ export default {
     logout: 'Logout',
     welcome: 'Welcome',
     selectLanguage: 'Select Language',
-    pleaseLogin: 'Please, log in to start planning and organizing with FamilySync.'
+    pleaseLogin: 'Please, log in to start planning and organizing with FamilySync.',
+    roles: {
+      title: 'User Roles',
+      grantedRoles: 'Granted user roles',
+      description: 'Role descriptions',
+      CalendarUser: {
+        description: 'The user can view the calendar and add events.',
+      },
+      ShoppingListUser: {
+        description: 'The user can view and manage the shopping list.',
+      },
+      TodoListUser: {
+        description: 'The user can view the todo list and add tasks.',
+      },
+      FamilySyncUser: {
+        description: 'The user has access the FamilySync app.',
+      },
+    },
   },
   auth: {
     dataIsProtected: 'Data is protected by Microsoft authentication.',

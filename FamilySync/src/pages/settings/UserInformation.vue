@@ -1,7 +1,16 @@
 <template>
-  <div v-if="isLoggedIn">
+  <div v-if="isLoggedIn" class="q-mb-md ">
     <p class="text-h5 q-mb-xs">{{ t('settingsPage.welcome') }}, {{ name }}</p>
-    <p class="q-mb-md">{{ t('youHaveTheFollowingRoles') }}: {{  userRoles }}</p>
+    <p class="q-mb-md">{{ t('youHaveTheFollowingRoles') }}:</p>
+    <q-table
+      class="q-mb- bg-amber-1"
+      bordered
+      :title="t('settingsPage.roles.title')"
+      dense
+      :rows="userRoleTableRows"
+      :columns="userRoleTableColumns"
+      row-key="name"
+    />
   </div>
   <div v-else-if="!isLoggedIn">
     <p class="text-h5 q-mb-xs">{{ t('settingsPage.welcome') }}:</p>
@@ -22,6 +31,32 @@ const msal = appContext.config.globalProperties.$msal;
 const name = ref('');
 const userRoles = computed(() => activeAccount.value?.idTokenClaims?.roles ?? [])
 const isLoggedIn = ref(false);
+const userRoleTableColumns = [
+  {
+    name: 'Role',
+    required: true,
+    label: t('settingsPage.roles.grantedRoles'),
+    align: 'left' as const,
+    field: 'roleType',
+    sortable: true,
+    classes: 'text-wrap',
+    style: 'white-space: normal;',
+  },
+  {
+    name: 'Role',
+    required: true,
+    label: t('settingsPage.roles.description'),
+    align: 'left' as const,
+    field: 'roleDescription',
+    sortable: true,
+    classes: 'text-wrap',
+    style: 'white-space: normal;',
+  },
+]
+const userRoleTableRows = userRoles.value.map(role => ({
+  roleType: role,
+  roleDescription: t(`settingsPage.roles.${role}.description`) || role,
+}));
 
 onMounted(async () => {
   const result = await msal.handleRedirectPromise();
@@ -35,4 +70,5 @@ onMounted(async () => {
     name.value = account.name || account.username;
   }
 });
+
 </script>

@@ -38,6 +38,23 @@ export default {
     welcome: 'Velkommen',
     selectLanguage: 'Velg språk',
     pleaseLogin: 'Vennligst logg inn for å begynne å planlegge og organisere med FamilySync.',
+    roles: {
+      title: 'Brukerroller',
+      grantedRoles: 'Tildelte brukerroller',
+      description: 'Rollebeskrivelser',
+      CalendarUser: {
+        description: 'Brukeren kan se kalenderen og legge til hendelser.',
+      },
+      ShoppingListUser: {
+        description: 'Brukeren kan se og administrere handlelisten.',
+      },
+      TodoListUser: {
+        description: 'Brukeren kan se todo-listen og legge til oppgaver.',
+      },
+      FamilySyncUser: {
+        description: 'Brukeren har tilgang til FamilySync-appen.',
+      },
+    },
   },
   auth: {
     dataIsProtected: 'Data er beskyttet av Microsoft-autentisering.',
