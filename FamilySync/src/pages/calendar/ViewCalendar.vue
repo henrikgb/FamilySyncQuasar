@@ -1,13 +1,13 @@
 <template>
   <q-layout class="q-py-lg">
-    <LoadingAnimation v-if="isLoading" />
+    <LoadingAnimation v-if="isLoading && isLoadingPublicHolidays" />
 
     <div v-else class="col item-center">
       <div class="row justify-center q-mb-lg">
         <q-date
           v-model="date"
           :events="events"
-          event-color="orange"
+          :event-color="getEventColor"
           color="teal"
         />
       </div>
@@ -42,6 +42,16 @@ import { useCalendarSchedule } from 'src/queries/useCalendarSchedule'
 import type { CalendarScheduleItemDTO } from 'src/dto/CalendarScheduleDTO'
 import LoadingAnimation from 'src/components/pageLayoutBuildingBlocks/LoadingAnimation.vue'
 import ContentContainer from 'src/components/pageLayoutBuildingBlocks/ContentContainer.vue'
+import { usePublicHolidays } from 'src/queries/usePublicHolidays'
+import type { PublicHolidayDTO } from 'src/dto/PublicHolidayDTO'
+
+/**
+ * Fetch public holidays data from the Nager.Date – Public API.
+ * - `publicHolidays`: Reactive data containing the public holidays.
+ * - `isLoadingPublicHolidays`: Boolean indicating whether the data is still being fetched.
+ */
+const countryCode = 'NO' // Norway
+const { data: publicHolidays, isLoading: isLoadingPublicHolidays } = usePublicHolidays(countryCode, new Date().getFullYear())
 
 /**
  * Fetch calendar schedule data from the API.
@@ -57,14 +67,43 @@ const { data: calendarSchedule, isLoading } = useCalendarSchedule()
 const defaultDate = new Date().toISOString().split('T')?.[0]?.replace(/-/g, '/') ?? ''
 const date = ref(defaultDate)
 
+
+/**
+ * Combine calendar schedule items with public holidays.
+ */
+const mergedSchedule = computed<CalendarScheduleItemDTO[]>(() => {
+  const calendarItems = calendarSchedule.value ?? []
+
+  const holidayItems = (publicHolidays.value ?? []).map((holiday: PublicHolidayDTO) => ({
+    date: holiday.date.replace(/-/g, '/'), // Convert date to the format YYYY/MM/DD
+    description: holiday.localName,
+  }))
+
+  return [...calendarItems, ...holidayItems]
+})
+
 /**
  * Extract unique dates from the calendar schedule for the `q-date` events.
  * - Returns an array of dates (`string[]`) to highlight on the calendar.
  */
 const events = computed(() => {
-  if (!calendarSchedule.value) return []
-  return calendarSchedule.value.map((item: CalendarScheduleItemDTO) => item.date)
+  if (!mergedSchedule.value) return []
+  return mergedSchedule.value.map((item: CalendarScheduleItemDTO) => item.date)
 })
+
+/**
+ * Extract public holiday dates for use in the calendar.
+ * - Returns an array of dates (`string[]`) to highlight on the calendar.
+ */
+const holidayDates = computed(() =>
+  (publicHolidays.value ?? []).map((item: CalendarScheduleItemDTO) => item.date.replace(/-/g, '/')) // Convert date to the format YYYY/MM/DD
+)
+const getEventColor = (dateStr: string): string => {
+  return holidayDates.value.includes(dateStr) ? 'blue' : 'orange'
+}
+
+
+
 
 /**
  * Group calendar schedule items by date.
@@ -76,8 +115,8 @@ const events = computed(() => {
  *   Output: { '2025-04-15': ['Meeting', 'Lunch'] }
  */
 const groupedPanels = computed(() => {
-  if (!calendarSchedule.value) return {}
-  return calendarSchedule.value.reduce((acc: Record<string, string[]>, item: CalendarScheduleItemDTO) => {
+  if (!mergedSchedule.value) return {}
+  return mergedSchedule.value.reduce((acc: Record<string, string[]>, item: CalendarScheduleItemDTO) => {
     // Initialize the array for the date if it doesn't exist
     if (!acc[item.date]) {
       acc[item.date] = []
@@ -88,7 +127,9 @@ const groupedPanels = computed(() => {
   }, {} as Record<string, string[]>)
 })
 
+console.log('Grouped Panels:', groupedPanels)
+
 const hasVisibleDescriptions = computed(() => {
-  return groupedPanels.value[date.value]?.length > 0
+  return (groupedPanels.value[date.value] ?? []).length > 0
 })
 </script>
