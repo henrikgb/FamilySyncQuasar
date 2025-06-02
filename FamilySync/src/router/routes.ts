@@ -50,7 +50,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: PATHS.SETTINGS,
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/SettingsPage.vue') }],
+    children: [{ path: '', component: () => import('pages/settings/SettingsPage.vue') }],
   },
   {
     path: '/:catchAll(.*)*',
