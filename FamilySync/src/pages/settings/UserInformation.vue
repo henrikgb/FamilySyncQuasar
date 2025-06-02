@@ -31,7 +31,7 @@ const msal = appContext.config.globalProperties.$msal;
 const name = ref('');
 const userRoles = computed(() => activeAccount.value?.idTokenClaims?.roles ?? [])
 const isLoggedIn = ref(false);
-const userRoleTableColumns = [
+const userRoleTableColumns = computed(() => [
   {
     name: 'Role',
     required: true,
@@ -52,11 +52,14 @@ const userRoleTableColumns = [
     classes: 'text-wrap',
     style: 'white-space: normal;',
   },
-]
-const userRoleTableRows = userRoles.value.map(role => ({
-  roleType: role,
-  roleDescription: t(`settingsPage.roles.${role}.description`) || role,
-}));
+]);
+
+const userRoleTableRows = computed(() =>
+  userRoles.value.map(role => ({
+    roleType: role,
+    roleDescription: t(`settingsPage.roles.${role}.description`) || role,
+  }))
+);
 
 onMounted(async () => {
   const result = await msal.handleRedirectPromise();
