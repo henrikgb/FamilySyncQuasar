@@ -37,6 +37,7 @@ export default {
     logout: 'Logout',
     welcome: 'Welcome',
     selectLanguage: 'Select Language',
+    pleaseLogin: 'Please, log in to start planning and organizing with FamilySync.'
   },
   auth: {
     dataIsProtected: 'Data is protected by Microsoft authentication.',
