@@ -1,6 +1,6 @@
 <template>
   <q-layout class="q-py-lg">
-    <LoadingAnimation v-if="isLoading || isLoadingPublicHolidays" />
+    <LoadingAnimation v-if="isLoadingCalendarSchedule || isLoadingPublicHolidays" />
 
     <div v-else class="col item-center">
       <div class="row justify-center q-mb-lg">
@@ -58,7 +58,7 @@ const { data: publicHolidays, isLoading: isLoadingPublicHolidays } = usePublicHo
  * - `calendarSchedule`: Reactive data containing the schedule items.
  * - `isLoading`: Boolean indicating whether the data is still being fetched.
  */
-const { data: calendarSchedule, isLoading } = useCalendarSchedule()
+const { data: calendarSchedule, isLoading: isLoadingCalendarSchedule } = useCalendarSchedule()
 
 /**
  * Default date for the `q-date` component.
