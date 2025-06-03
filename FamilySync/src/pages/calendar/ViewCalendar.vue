@@ -53,12 +53,14 @@ import type { PublicHolidayDTO } from 'src/dto/PublicHolidayDTO'
 const countryCode = 'NO' // Norway
 const { data: publicHolidays, isLoading: isLoadingPublicHolidays } = usePublicHolidays(countryCode, new Date().getFullYear())
 
+
 /**
  * Fetch calendar schedule data from the API.
  * - `calendarSchedule`: Reactive data containing the schedule items.
  * - `isLoading`: Boolean indicating whether the data is still being fetched.
  */
 const { data: calendarSchedule, isLoading: isLoadingCalendarSchedule } = useCalendarSchedule()
+
 
 /**
  * Default date for the `q-date` component.
@@ -82,6 +84,7 @@ const mergedSchedule = computed<CalendarScheduleItemDTO[]>(() => {
   return [...calendarItems, ...holidayItems]
 })
 
+
 /**
  * Extract unique dates from the calendar schedule for the `q-date` events.
  * - Returns an array of dates (`string[]`) to highlight on the calendar.
@@ -90,6 +93,7 @@ const events = computed(() => {
   if (!mergedSchedule.value) return []
   return mergedSchedule.value.map((item: CalendarScheduleItemDTO) => item.date)
 })
+
 
 /**
  * Extract public holiday dates for use in the calendar.
@@ -101,8 +105,6 @@ const holidayDates = computed(() =>
 const getEventColor = (dateStr: string): string => {
   return holidayDates.value.includes(dateStr) ? 'blue' : 'orange'
 }
-
-
 
 
 /**
@@ -127,7 +129,6 @@ const groupedPanels = computed(() => {
   }, {} as Record<string, string[]>)
 })
 
-console.log('Grouped Panels:', groupedPanels)
 
 const hasVisibleDescriptions = computed(() => {
   return (groupedPanels.value[date.value] ?? []).length > 0
