@@ -1,6 +1,6 @@
 <template>
   <q-layout class="q-py-lg">
-    <LoadingAnimation v-if="isLoading && isLoadingPublicHolidays" />
+    <LoadingAnimation v-if="isLoading || isLoadingPublicHolidays" />
 
     <div v-else class="col item-center">
       <div class="row justify-center q-mb-lg">
