@@ -4,21 +4,30 @@ import { API_BASE_PUBLIC_HOLIDAYS } from 'src/constants/api';
 import { getAccessToken } from 'src/utils/getAccessToken';
 import { computed, unref } from 'vue';
 import type { Ref } from 'vue';
+import { ref } from 'vue';
 
-export function usePublicHolidays( countryCode: string, year: Ref<number, number> ) {
+export function usePublicHolidays(
+  countryCode: string,
+  year: Ref<number, number>,
+) {
+  const fetchedPublicHolidayYears = ref<number[]>([])
+  const currentYear = computed(() => unref(year));
   const key = computed(() => ['publicHolidays', countryCode, year.value])
+  const shouldFetch = computed(() => {
+    return !fetchedPublicHolidayYears.value.includes(currentYear.value);
+  });
+
   return useQuery({
     queryKey: key,
     queryFn: async () => {
-      const currentYear = unref(year.value)
       const accessToken = await getAccessToken();
       if (!accessToken) {
         throw new Error('Not authenticated');
       }
-      console.log(`Fetching public holidays for ${countryCode} in ${currentYear}`);
-      const res = await axios.get(`${API_BASE_PUBLIC_HOLIDAYS}/${currentYear}/${countryCode}`)
+      const res = await axios.get(`${API_BASE_PUBLIC_HOLIDAYS}/${currentYear.value}/${countryCode}`)
+      fetchedPublicHolidayYears.value.push(currentYear.value);
       return res.data;
     },
-    enabled: () => true
+    enabled: shouldFetch
   });
 }
