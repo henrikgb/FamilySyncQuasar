@@ -9,6 +9,7 @@
           :events="events"
           :event-color="getEventColor"
           color="teal"
+          @navigation="onNavigation"
         />
       </div>
 
@@ -45,22 +46,6 @@ import ContentContainer from 'src/components/pageLayoutBuildingBlocks/ContentCon
 import { usePublicHolidays } from 'src/queries/usePublicHolidays'
 import type { PublicHolidayDTO } from 'src/dto/PublicHolidayDTO'
 
-/**
- * Fetch public holidays data from the Nager.Date – Public API.
- * - `publicHolidays`: Reactive data containing the public holidays.
- * - `isLoadingPublicHolidays`: Boolean indicating whether the data is still being fetched.
- */
-const countryCode = 'NO' // Norway
-const { data: publicHolidays, isLoading: isLoadingPublicHolidays } = usePublicHolidays(countryCode, new Date().getFullYear())
-
-
-/**
- * Fetch calendar schedule data from the API.
- * - `calendarSchedule`: Reactive data containing the schedule items.
- * - `isLoading`: Boolean indicating whether the data is still being fetched.
- */
-const { data: calendarSchedule, isLoading: isLoadingCalendarSchedule } = useCalendarSchedule()
-
 
 /**
  * Default date for the `q-date` component.
@@ -68,6 +53,31 @@ const { data: calendarSchedule, isLoading: isLoadingCalendarSchedule } = useCale
  */
 const defaultDate = new Date().toISOString().split('T')?.[0]?.replace(/-/g, '/') ?? ''
 const date = ref(defaultDate)
+
+/**
+ * Fetch public holidays data from the Nager.Date – Public API.
+ * - `publicHolidays`: Reactive data containing the public holidays.
+ * - `isLoadingPublicHolidays`: Boolean indicating whether the data is still being fetched.
+ */
+const countryCode = 'NO' // Norway
+const defaultSelectedYear = new Date().getFullYear()
+const selectedYear = ref(defaultSelectedYear)
+const { data: publicHolidays, isLoading: isLoadingPublicHolidays } = usePublicHolidays(countryCode, selectedYear)
+function onNavigation(viewDate: {year: number, month: number}) {
+  if (viewDate.year !== selectedYear.value) {
+    // If the year has changed, update the selected year which will trigger a new API call
+    selectedYear.value = viewDate.year
+  }
+  // Always set date to the first day of the navigated month
+  const firstDay = `${viewDate.year}/${String(viewDate.month).padStart(2, '0')}/01`
+  date.value = firstDay
+}
+/**
+ * Fetch calendar schedule data from the API.
+ * - `calendarSchedule`: Reactive data containing the schedule items.
+ * - `isLoading`: Boolean indicating whether the data is still being fetched.
+ */
+const { data: calendarSchedule, isLoading: isLoadingCalendarSchedule } = useCalendarSchedule()
 
 
 /**
