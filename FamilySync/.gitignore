@@ -2,6 +2,9 @@
 .thumbs.db
 node_modules
 
+# ignore test coverage
+coverage/
+
 # Environment variables
 .env
 
