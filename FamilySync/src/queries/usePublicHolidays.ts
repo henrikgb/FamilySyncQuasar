@@ -6,7 +6,7 @@ import { computed, unref } from 'vue';
 import type { Ref } from 'vue';
 import { ref } from 'vue';
 
-const fetchedPublicHolidayYears = ref<number[]>([])
+export const fetchedPublicHolidayYears = ref<number[]>([])
 
 export function usePublicHolidays(
   countryCode: string,
