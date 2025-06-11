@@ -1,6 +1,6 @@
 import 'src/tests/mocks/msal.mock.ts'
 import { createI18n } from 'vue-i18n'
-import { render } from '@testing-library/vue'
+import { render, prettyDOM } from '@testing-library/vue'
 import { describe, test, expect } from 'vitest'
 import CalendarPage from 'src/pages/calendar/CalendarPage.vue'
 
@@ -25,6 +25,7 @@ describe('CalendarPage', () => {
         plugins: [i18n],
       },
     })
-    expect(utils.getByText('Calendar')).toBeInTheDocument()
+    expect(utils.getByText(en.calendarPage.title)).toBeInTheDocument()
+    console.log('calendar page', prettyDOM(utils.container))
   })
 })
