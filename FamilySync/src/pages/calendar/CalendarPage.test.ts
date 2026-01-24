@@ -1,4 +1,4 @@
-import 'src/tests/mocks/msal.mock.ts'
+import 'src/tests/mocks/msal.mock'
 import { createI18n } from 'vue-i18n'
 import { render, prettyDOM } from '@testing-library/vue'
 import { describe, test, expect, vi } from 'vitest'
