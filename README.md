@@ -4,6 +4,13 @@ FamilySync is a full-stack web application designed to simplify everyday family 
 
 The project was developed as a personal full-stack project to explore modern frontend architecture, Azure cloud services, authentication with Microsoft Entra ID, and scalable API design using ASP.NET Core.
 
+The frontend application communicates with a separate ASP.NET Core backend API responsible for data storage and business logic.
+
+Backend repository:
+```bash
+https://github.com/henrikgb/FamilySyncApi
+```
+
 ---
 
 ## 📱 Application Preview
