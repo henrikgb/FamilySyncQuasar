@@ -126,21 +126,6 @@ for both frontend and backend components.
 
 ---
 
-# 📂 Project Structure
-
-```bash
-FamilySync/
-├── src/
-├── components/
-├── pages/
-├── services/
-├── tests/
-├── public/
-└── ...
-```
-
----
-
 # 🛠️ Getting Started
 
 ## Clone Repository
