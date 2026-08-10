@@ -28,29 +28,18 @@ export const PATHS = {
 
 const routes: RouteRecordRaw[] = [
   {
-    path: PATHS.HOME,
+    path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/HomePage.vue') }],
-  },
-  {
-    path: PATHS.CALENDAR,
-    component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/calendar/CalendarPage.vue') }],
-  },
-  {
-    path: PATHS.SHOPPING_LIST,
-    component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('src/pages/shoppingList/ShoppingListPage.vue') }],
-  },
-  {
-    path: PATHS.TODO_LIST,
-    component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('src/pages/todoList/TodoListPage.vue') }],
-  },
-  {
-    path: PATHS.SETTINGS,
-    component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/settings/SettingsPage.vue') }],
+    children: [
+      { path: PATHS.HOME, component: () => import('pages/HomePage.vue') },
+      { path: PATHS.CALENDAR, component: () => import('pages/calendar/CalendarPage.vue') },
+      {
+        path: PATHS.SHOPPING_LIST,
+        component: () => import('src/pages/shoppingList/ShoppingListPage.vue'),
+      },
+      { path: PATHS.TODO_LIST, component: () => import('src/pages/todoList/TodoListPage.vue') },
+      { path: PATHS.SETTINGS, component: () => import('pages/settings/SettingsPage.vue') },
+    ],
   },
   {
     path: '/:catchAll(.*)*',

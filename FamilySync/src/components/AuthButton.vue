@@ -21,6 +21,7 @@ import { useRouter } from 'vue-router';
 import type { AccountInfo } from '@azure/msal-browser';
 import { useI18n } from 'vue-i18n';
 import { loginRequest } from 'src/boot/msal';
+import { clearCachedAccessToken } from 'src/utils/getAccessToken';
 
 const { t } = useI18n();
 const { appContext } = getCurrentInstance()!;
@@ -33,6 +34,7 @@ const login = () => {
   void msal.loginRedirect(loginRequest);
 };
 const logout = () => {
+  clearCachedAccessToken();
   void msal.logoutRedirect();
 };
 
